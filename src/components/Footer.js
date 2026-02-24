@@ -168,7 +168,7 @@ const Footer = () => {
           className="flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-gray-400 text-sm text-center md:text-left">
-            © {new Date().getFullYear()} Your Name. All rights reserved.{' '}
+            © {new Date().getFullYear()} Khushwant. All rights reserved.{' '}
             <span className="inline-flex items-center gap-1">
               Made with <FiHeart className="text-red-500 animate-pulse" size={14} /> and lots of coffee
             </span>
