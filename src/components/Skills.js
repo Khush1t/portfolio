@@ -1,26 +1,38 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import {
-  FaReact,
-  FaNodeJs,
-  FaPython,
-  FaDocker,
-  FaGitAlt,
-  FaAws,
-} from 'react-icons/fa';
+
+// Frontend & UI
+import { FaReact, FaAngular } from 'react-icons/fa';
 import {
   SiJavascript,
   SiTypescript,
-  SiMongodb,
-  SiPostgresql,
+  SiHtml5,
+  SiCss3,
+  SiBootstrap,
   SiTailwindcss,
-  SiNextdotjs,
-  SiGraphql,
-  SiRedis,
-  SiKubernetes,
-  SiFigma,
+  SiMaterialdesign,
+  SiVscodium,
 } from 'react-icons/si';
+
+// Backend & Languages
+import { FaJava } from 'react-icons/fa';
+import { SiSpringboot, SiCplusplus, SiPostgresql } from 'react-icons/si';
+
+// Tools & Platforms
+import { FaGitAlt } from 'react-icons/fa';
+import {
+  SiApachekafka,
+  SiRedis,
+  SiJsonwebtokens,
+  SiPostman,
+  SiIntellijidea,
+  SiVisualstudiocode,
+} from 'react-icons/si';
+
+// DevOps & Cloud
+import { FaAws } from 'react-icons/fa';
+import { SiSubversion } from 'react-icons/si';
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -32,32 +44,48 @@ const Skills = () => {
     {
       title: 'Frontend',
       skills: [
-        { name: 'React', icon: FaReact, color: '#61DAFB', level: 95 },
-        { name: 'Next.js', icon: SiNextdotjs, color: '#000000', level: 90 },
+        { name: 'Angular', icon: FaAngular, color: '#C3002F', level: 90 },
+        { name: 'React', icon: FaReact, color: '#61DAFB', level: 92 },
         { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E', level: 95 },
         { name: 'TypeScript', icon: SiTypescript, color: '#3178C6', level: 90 },
-        { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4', level: 95 },
+        { name: 'HTML5', icon: SiHtml5, color: '#E34F26', level: 95 },
+        { name: 'CSS3', icon: SiCss3, color: '#1572B6', level: 95 },
+        { name: 'Bootstrap', icon: SiBootstrap, color: '#7952B3', level: 85 },
+        { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4', level: 90 },
+        { name: 'Material-UI', icon: SiMaterialdesign, color: '#0081CB', level: 85 },
+        { name: 'PrimeNG', icon: FaAngular, color: '#0C7C59', level: 80 },
       ],
     },
     {
       title: 'Backend',
       skills: [
-        { name: 'Node.js', icon: FaNodeJs, color: '#339933', level: 90 },
-        { name: 'Python', icon: FaPython, color: '#3776AB', level: 85 },
-        { name: 'GraphQL', icon: SiGraphql, color: '#E10098', level: 85 },
-        { name: 'MongoDB', icon: SiMongodb, color: '#47A248', level: 88 },
-        { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1', level: 87 },
+        { name: 'Java', icon: FaJava, color: '#007396', level: 90 },
+        { name: 'Spring Boot', icon: SiSpringboot, color: '#6DB33F', level: 88 },
+        { name: 'REST APIs', icon: SiPostman, color: '#FF6C37', level: 92 },
+        { name: 'Microservices', icon: SiSpringboot, color: '#FF5722', level: 85 },
+        { name: 'SQL', icon: SiPostgresql, color: '#336791', level: 87 },
+        { name: 'C/C++', icon: SiCplusplus, color: '#00599C', level: 80 },
       ],
     },
     {
-      title: 'DevOps & Tools',
+      title: 'Tools & Platforms',
       skills: [
-        { name: 'Docker', icon: FaDocker, color: '#2496ED', level: 85 },
-        { name: 'Kubernetes', icon: SiKubernetes, color: '#326CE5', level: 75 },
-        { name: 'AWS', icon: FaAws, color: '#FF9900', level: 80 },
-        { name: 'Git', icon: FaGitAlt, color: '#F05032', level: 95 },
+        { name: 'Apache Kafka', icon: SiApachekafka, color: '#231F20', level: 80 },
         { name: 'Redis', icon: SiRedis, color: '#DC382D', level: 82 },
-        { name: 'Figma', icon: SiFigma, color: '#F24E1E', level: 88 },
+        { name: 'JWT / OAuth 2.0', icon: SiJsonwebtokens, color: '#000000', level: 85 },
+        { name: 'Log4j2', icon: FaJava, color: '#FF0000', level: 75 },
+        { name: 'Postman', icon: SiPostman, color: '#FF6C37', level: 90 },
+        { name: 'IntelliJ IDEA', icon: SiIntellijidea, color: '#000000', level: 88 },
+        { name: 'VS Code', icon: SiVscodium, color: '#007ACC', level: 92 },
+      ],
+    },
+    {
+      title: 'DevOps & Cloud',
+      skills: [
+        { name: 'AWS (EC2, RDS, S3)', icon: FaAws, color: '#FF9900', level: 80 },
+        { name: 'Git/GitHub', icon: FaGitAlt, color: '#F05032', level: 95 },
+        { name: 'SVN', icon: SiSubversion, color: '#809CC9', level: 75 },
+        { name: 'CI/CD (basic)', icon: FaGitAlt, color: '#00C853', level: 70 },
       ],
     },
   ];
@@ -122,7 +150,7 @@ const Skills = () => {
                 <h3 className="text-2xl font-display font-bold text-gray-900 dark:text-white text-center md:text-left">
                   {category.title}
                 </h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {category.skills.map((skill, skillIndex) => (
                     <motion.div
@@ -197,17 +225,12 @@ const Skills = () => {
             </h4>
             <div className="flex flex-wrap gap-3 justify-center max-w-3xl mx-auto">
               {[
-                'REST APIs',
+                'SOAP APIs',
                 'WebSockets',
                 'CI/CD',
                 'Microservices',
-                'Testing (Jest, Cypress)',
+                'Testing (Jest, JUnit, Mockito)',
                 'Agile/Scrum',
-                'Redux',
-                'Express.js',
-                'Socket.io',
-                'Firebase',
-                'Vercel',
                 'Netlify',
               ].map((tech, index) => (
                 <motion.span

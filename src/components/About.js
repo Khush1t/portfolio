@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiDownload, FiAward, FiCode, FiUsers, FiTrendingUp } from 'react-icons/fi';
+import { FiAward, FiCode, FiUsers, FiTrendingUp } from 'react-icons/fi';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -31,12 +31,12 @@ const About = () => {
     },
   };
 
-  const stats = [
-    { icon: FiCode, value: '5+', label: 'Years Experience', bg: 'bg-pastel-blue/40' },
-    { icon: FiAward, value: '50+', label: 'Projects Completed', bg: 'bg-pastel-lavender/40' },
-    { icon: FiUsers, value: '100+', label: 'Happy Clients', bg: 'bg-pastel-mint/40' },
-    { icon: FiTrendingUp, value: '95%', label: 'Success Rate', bg: 'bg-pastel-peach/40' },
-  ];
+  // const stats = [
+  //   { icon: FiCode, value: '2+', label: 'Years Experience', bg: 'bg-pastel-blue/40' },
+  //   { icon: FiAward, value: '10+', label: 'Projects Completed', bg: 'bg-pastel-lavender/40' },
+  //   { icon: FiUsers, value: '10+', label: 'Happy Clients', bg: 'bg-pastel-mint/40' },
+  //   { icon: FiTrendingUp, value: '95%', label: 'Success Rate', bg: 'bg-pastel-peach/40' },
+  // ];
 
   return (
     <section
@@ -63,13 +63,10 @@ const About = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary dark:text-white mb-6">
-              Turning Ideas Into{' '}
-              <span className="text-text-primary dark:text-white">
-                Reality
-              </span>
+              Building Scalable Systems, One Clean Line of Code at a Time
             </h2>
             <p className="text-xl text-text-muted dark:text-gray-400 max-w-3xl mx-auto">
-              Passionate about creating elegant solutions to complex problems
+              Software Engineer passionate about solving complex problems, doodling ideas, and occasionally beating the clock on a Rubik’s cube.
             </p>
           </motion.div>
 
@@ -82,12 +79,12 @@ const About = () => {
                 <div className="pl-8 space-y-6">
                   <div>
                     <h3 className="text-2xl font-bold text-text-primary dark:text-white mb-3">
-                      Professional Developer & Designer
+                      Software Engineer
                     </h3>
                     <p className="text-lg text-text-muted dark:text-gray-400 leading-relaxed">
-                      With over 5 years of experience in web development, I specialize in creating
-                      scalable applications with modern technologies. My approach combines technical
-                      expertise with creative problem-solving to deliver exceptional results.
+                      I began my journey at Delhi Technological University, where I built a strong foundation in software engineering.
+                      Now at Iffco Tokio, I work hands-on with Angular, React, and Spring Boot to craft scalable web applications.
+                      I thrive on solving complex problems with clean code and am always eager to explore new technologies and keep learning.
                     </p>
                   </div>
 
@@ -97,10 +94,11 @@ const About = () => {
                     </h4>
                     <ul className="space-y-3">
                       {[
-                        'Full-stack development expertise',
-                        'Modern UI/UX design principles',
-                        'Agile methodology & team collaboration',
-                        'Performance optimization & scalability',
+                        'Hands-on expertise in Angular, React & Spring Boot',
+                        'Experience building scalable microservices and modern web apps',
+                        'Strong problem-solving mindset with a love for clean code',
+                        'Collaborative approach with a knack for learning and adapting quickly',
+                        // 'A creative streak — whether doodling, designing, or solving Rubik’s cubes faster than most queries',
                       ].map((item, index) => (
                         <motion.li
                           key={index}
@@ -119,17 +117,12 @@ const About = () => {
                       ))}
                     </ul>
                   </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-pastel-lavender hover:bg-pastel-lavender/80 text-text-primary rounded-2xl font-semibold shadow-md hover:shadow-lg transition-all"
-                  >
-                    <FiDownload size={20} />
-                    Download Resume
-                  </motion.button>
                 </div>
               </div>
+              <p className="text-base text-text-muted dark:text-gray-400 mt-6 text-center">
+                When I’m not coding, I’m sketching ideas, solving Rubik’s cubes, or enjoying football, F1.
+                Always curious, always learning.
+              </p>
             </motion.div>
 
             {/* Right Column - Image/Visual */}
@@ -140,17 +133,14 @@ const About = () => {
                 <div className="absolute inset-0 bg-pastel-lavender/20 rounded-3xl -rotate-6" />
 
                 {/* Main Container */}
-                <div className="relative bg-pastel-fog dark:bg-dark-800 rounded-3xl overflow-hidden aspect-square shadow-xl border border-pastel-powder/30">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <div className="w-40 h-40 mx-auto mb-6 rounded-full bg-pastel-lavender flex items-center justify-center text-text-primary text-6xl font-bold shadow-lg">
-                        YN
-                      </div>
-                      <p className="text-sm text-text-muted dark:text-gray-400">
-                        Replace with your professional photo
-                      </p>
-                    </div>
-                  </div>
+                <div className="relative bg-pastel-fog dark:bg-dark-800 rounded-3xl overflow-hidden aspect-square shadow-xl border border-pastel-powder/30 flex items-center justify-center">
+                  <motion.img
+                    src="/khushwant.png"
+                    alt="Professional Photograph"
+                    className="w-3/4 h-3/4 object-cover rounded-2xl shadow-lg"
+                    whileHover={{ scale: 1.15, y: -5 }}
+                    transition={{ duration: 0.6, ease: 'easeInOut' }}
+                  />
                 </div>
 
                 {/* Floating Badge */}
@@ -161,7 +151,7 @@ const About = () => {
                 >
                   <div className="text-center">
                     <div className="text-4xl font-bold text-text-primary dark:text-white">
-                      5+
+                      2+
                     </div>
                     <div className="text-sm text-text-muted dark:text-gray-400 font-medium">
                       Years Experience
@@ -173,7 +163,7 @@ const About = () => {
           </div>
 
           {/* Stats Grid - Flat Pastel Cards */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="grid grid-cols-2 md:grid-cols-4 gap-6"
           >
@@ -199,7 +189,7 @@ const About = () => {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </section>

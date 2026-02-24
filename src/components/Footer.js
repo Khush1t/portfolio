@@ -17,10 +17,10 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: FiGithub, href: 'https://github.com', label: 'GitHub' },
-    { icon: FiLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: FiTwitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: FiMail, href: 'mailto:your.email@example.com', label: 'Email' },
+    { icon: FiGithub, href: 'https://github.com/Khush1t', label: 'GitHub' },
+    { icon: FiLinkedin, href: 'https://linkedin.com/in/khush1t', label: 'LinkedIn' },
+    { icon: FiTwitter, href: 'https://twitter.com/Khush_1t', label: 'Twitter' },
+    { icon: FiMail, href: 'mailto:khushwant0328@gmail.com', label: 'Email' },
   ];
 
   const handleNavClick = (href) => {
@@ -135,22 +135,22 @@ const Footer = () => {
             <ul className="space-y-3 text-gray-400">
               <li>
                 <a
-                  href="mailto:your.email@example.com"
+                  href="mailto:khushwant0328@gmail.com"
                   className="hover:text-white transition-colors"
                 >
-                  your.email@example.com
+                  khushwant0328@gmail.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+15551234567"
+                  href="tel:+91 8800170875"
                   className="hover:text-white transition-colors"
                 >
-                  +1 (555) 123-4567
+                  +91 880 0170 875
                 </a>
               </li>
               <li className="text-gray-400">
-                San Francisco, CA
+                New Delhi, India
               </li>
             </ul>
           </motion.div>

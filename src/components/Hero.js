@@ -75,7 +75,7 @@ const Hero = () => {
           >
             Hi, I'm{' '}
             <span className="text-text-primary dark:text-white">
-              Your Name
+              Khushwant
             </span>
           </motion.h1>
 
@@ -106,7 +106,7 @@ const Hero = () => {
             variants={itemVariants}
             className="text-lg sm:text-xl text-text-muted dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            Crafting exceptional digital experiences through clean code, 
+            Crafting exceptional digital experiences through clean code,
             modern design, and innovative solutions.
           </motion.p>
 
@@ -124,15 +124,17 @@ const Hero = () => {
               View My Work
               <FiArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
             </motion.button>
-            
-            <motion.button
+
+            <motion.a
+              href="/resume.pdf"
+              download="My_Resume.pdf"
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-4 bg-white/90 dark:bg-dark-800/90 backdrop-blur-sm text-text-primary dark:text-white rounded-2xl font-semibold shadow-md hover:shadow-lg transition-all border border-pastel-blue/30 dark:border-pastel-powder/20 flex items-center gap-2"
             >
               <FiDownload size={20} />
               Download Resume
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Social Links - Clean Pastel Cards */}
@@ -141,9 +143,9 @@ const Hero = () => {
             className="flex gap-4 justify-center"
           >
             {[
-              { icon: FiGithub, href: 'https://github.com', label: 'GitHub', bg: 'bg-pastel-powder/30 hover:bg-pastel-powder/50' },
-              { icon: FiLinkedin, href: 'https://linkedin.com', label: 'LinkedIn', bg: 'bg-pastel-blue/30 hover:bg-pastel-blue/50' },
-              { icon: FiMail, href: 'mailto:your.email@example.com', label: 'Email', bg: 'bg-pastel-peach/30 hover:bg-pastel-peach/50' },
+              { icon: FiGithub, href: 'https://github.com/Khush1t', label: 'GitHub', bg: 'bg-pastel-powder/30 hover:bg-pastel-powder/50' },
+              { icon: FiLinkedin, href: 'https://linkedin.com/in/khush1t', label: 'LinkedIn', bg: 'bg-pastel-blue/30 hover:bg-pastel-blue/50' },
+              { icon: FiMail, href: 'mailto:khushwant0328@gmail.com', label: 'Email', bg: 'bg-pastel-peach/30 hover:bg-pastel-peach/50' },
             ].map((social) => (
               <motion.a
                 key={social.label}

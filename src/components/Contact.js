@@ -33,22 +33,22 @@ const Contact = () => {
     {
       icon: FiMail,
       title: 'Email',
-      value: 'your.email@example.com',
-      href: 'mailto:your.email@example.com',
+      value: 'khushwant0328@gmail.com',
+      href: 'mailto:khushwant0328@gmail.com',
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: FiPhone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      value: '+91 880 0170 875',
+      href: 'tel:+918800170875',
       color: 'from-green-500 to-emerald-500',
     },
     {
       icon: FiMapPin,
       title: 'Location',
-      value: 'San Francisco, CA',
-      href: 'https://maps.google.com',
+      value: 'New Delhi, India',
+      href: 'https://www.google.com/maps/place/New+Delhi,+Delhi,+India',
       color: 'from-purple-500 to-pink-500',
     },
   ];
@@ -57,19 +57,19 @@ const Contact = () => {
     {
       icon: FiLinkedin,
       name: 'LinkedIn',
-      href: 'https://linkedin.com',
+      href: 'https://linkedin.com/in/khush1t',
       color: '#0077B5',
     },
     {
       icon: FiGithub,
       name: 'GitHub',
-      href: 'https://github.com',
+      href: 'https://github.com/Khush1t',
       color: '#333',
     },
     {
       icon: FiTwitter,
       name: 'Twitter',
-      href: 'https://twitter.com',
+      href: 'https://x.com/Khush_1t',
       color: '#1DA1F2',
     },
   ];
@@ -300,11 +300,10 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border-2 ${
-                        errors.name
-                          ? 'border-red-500 focus:border-red-500'
-                          : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
-                      } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 ${errors.name
+                        ? 'border-red-500 focus:border-red-500'
+                        : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
+                        } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors`}
                       placeholder="John Doe"
                     />
                     {errors.name && (
@@ -332,11 +331,10 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border-2 ${
-                        errors.email
-                          ? 'border-red-500 focus:border-red-500'
-                          : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
-                      } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 ${errors.email
+                        ? 'border-red-500 focus:border-red-500'
+                        : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
+                        } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors`}
                       placeholder="john@example.com"
                     />
                     {errors.email && (
@@ -364,11 +362,10 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border-2 ${
-                        errors.subject
-                          ? 'border-red-500 focus:border-red-500'
-                          : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
-                      } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 ${errors.subject
+                        ? 'border-red-500 focus:border-red-500'
+                        : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
+                        } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors`}
                       placeholder="Project Inquiry"
                     />
                     {errors.subject && (
@@ -396,11 +393,10 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows="5"
-                      className={`w-full px-4 py-3 rounded-xl border-2 ${
-                        errors.message
-                          ? 'border-red-500 focus:border-red-500'
-                          : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
-                      } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors resize-none`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 ${errors.message
+                        ? 'border-red-500 focus:border-red-500'
+                        : 'border-gray-300 dark:border-dark-700 focus:border-primary-500'
+                        } bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none transition-colors resize-none`}
                       placeholder="Tell me about your project..."
                     />
                     {errors.message && (
@@ -420,11 +416,10 @@ const Contact = () => {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isSubmitting || isSubmitted}
-                    className={`w-full py-4 rounded-xl font-semibold text-white shadow-lg transition-all flex items-center justify-center gap-2 ${
-                      isSubmitted
-                        ? 'bg-green-500'
-                        : 'bg-gradient-to-r from-primary-600 to-purple-600 hover:shadow-xl'
-                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                    className={`w-full py-4 rounded-xl font-semibold text-white shadow-lg transition-all flex items-center justify-center gap-2 ${isSubmitted
+                      ? 'bg-green-500'
+                      : 'bg-gradient-to-r from-primary-600 to-purple-600 hover:shadow-xl'
+                      } disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {isSubmitting ? (
                       <>

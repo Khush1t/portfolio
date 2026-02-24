@@ -58,7 +58,7 @@ const Navigation = () => {
               onClick={() => handleNavClick('#home')}
             >
               <span className="text-text-primary dark:text-white">
-                YourName
+                Khushwant
               </span>
             </motion.div>
 

@@ -12,59 +12,38 @@ const Experience = () => {
   const experiences = [
     {
       id: 1,
-      title: 'Senior Full Stack Developer',
-      company: 'Tech Innovations Inc.',
-      location: 'San Francisco, CA',
-      period: '2021 - Present',
-      description: 'Leading development of scalable web applications and mentoring junior developers. Architected microservices infrastructure that improved system performance by 40%.',
+      title: 'Software Engineer',
+      company: 'Iffco Tokio General Insurance',
+      location: 'Gurugram, India',
+      period: 'July 2024 – Present',
+      description:
+        'Designing and developing scalable internal tools and microservices to streamline product approvals, enhance collaboration, and improve system performance across insurance platforms.',
       achievements: [
-        'Led team of 5 developers in migrating legacy systems to modern tech stack',
-        'Implemented CI/CD pipeline reducing deployment time by 60%',
-        'Developed real-time collaboration features used by 100K+ users',
+        'Built Product Management Dashboard reducing product approval cycle time by 50%',
+        'Engineered real-time chat channels with WebSockets, cutting approval delays by 65%',
+        'Implemented RBAC, JWT authentication, and AES encryption to reduce unauthorized access risks by 38%',
+        'Enhanced email notification service with Apache Kafka, reducing manual follow-ups by 70%',
+        'Developed Bulk Upload Microservice reducing data upload time from 20 minutes to 40 seconds (96.6% faster)',
+        'Achieved 6,000 records/sec throughput with async I/O in Python, ensuring 99.95% uptime',
+        'Designed Keyword Search Microservice using Elastic Stack, reducing query response time by 75%',
+        'Integrated Redis caching layer, improving high-demand search performance by 62%',
       ],
       color: 'from-blue-500 to-purple-500',
     },
     {
       id: 2,
-      title: 'Full Stack Developer',
-      company: 'Digital Solutions Co.',
-      location: 'New York, NY',
-      period: '2019 - 2021',
-      description: 'Developed and maintained multiple client-facing applications using React, Node.js, and AWS. Collaborated with cross-functional teams to deliver high-quality products.',
+      title: 'Research Intern',
+      company: 'University of Surrey, UK',
+      location: 'Delhi, India (Remote)',
+      period: 'June 2023 – August 2023',
+      description:
+        'Conducted research on IoT-enabled approaches combined with machine learning models to optimize agricultural production, focusing on coffee yield prediction in India.',
       achievements: [
-        'Built e-commerce platform handling 50K+ daily transactions',
-        'Optimized database queries improving response time by 70%',
-        'Implemented OAuth2 authentication system',
+        'Developed ML models predicting coffee yield with 95% accuracy',
+        'Created dataset of 50,000+ data points from 50+ farms across three major coffee-producing regions',
+        'Enabled farmers to optimize production and minimize losses through predictive analytics',
       ],
       color: 'from-green-500 to-teal-500',
-    },
-    {
-      id: 3,
-      title: 'Frontend Developer',
-      company: 'Creative Web Agency',
-      location: 'Austin, TX',
-      period: '2018 - 2019',
-      description: 'Specialized in creating responsive, pixel-perfect user interfaces. Worked closely with designers to translate mockups into interactive web experiences.',
-      achievements: [
-        'Developed 20+ landing pages with 95+ PageSpeed scores',
-        'Created reusable component library adopted company-wide',
-        'Improved mobile performance by 50% through optimization',
-      ],
-      color: 'from-pink-500 to-red-500',
-    },
-    {
-      id: 4,
-      title: 'Junior Web Developer',
-      company: 'Startup Labs',
-      location: 'Remote',
-      period: '2017 - 2018',
-      description: 'Started career building MVPs for various startups. Gained experience in rapid prototyping and working with diverse tech stacks.',
-      achievements: [
-        'Contributed to 5+ successful product launches',
-        'Learned full-stack development from ground up',
-        'Collaborated with distributed team across 3 time zones',
-      ],
-      color: 'from-yellow-500 to-orange-500',
     },
   ];
 
@@ -128,16 +107,14 @@ const Experience = () => {
                 <motion.div
                   key={exp.id}
                   variants={itemVariants}
-                  className={`relative flex flex-col md:flex-row gap-8 ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
+                  className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                    }`}
                 >
                   {/* Content Card */}
                   <motion.div
                     whileHover={{ scale: 1.02, y: -5 }}
-                    className={`flex-1 ${
-                      index % 2 === 0 ? 'md:text-right' : 'md:text-left'
-                    }`}
+                    className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                      }`}
                   >
                     <div className="bg-white dark:bg-dark-900 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-dark-700">
                       {/* Company & Title */}
@@ -149,9 +126,8 @@ const Experience = () => {
                           <FiBriefcase size={20} />
                           <span>{exp.company}</span>
                         </div>
-                        <div className={`flex flex-wrap gap-3 text-gray-600 dark:text-gray-400 text-sm ${
-                          index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
-                        }`}>
+                        <div className={`flex flex-wrap gap-3 text-gray-600 dark:text-gray-400 text-sm ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
+                          }`}>
                           <span className="flex items-center gap-1">
                             <FiCalendar size={16} />
                             {exp.period}
@@ -169,9 +145,8 @@ const Experience = () => {
                       </p>
 
                       {/* Achievements */}
-                      <div className={`space-y-2 ${
-                        index % 2 === 0 ? 'md:text-right' : 'md:text-left'
-                      }`}>
+                      <div className={`space-y-2 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                        }`}>
                         <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
                           Key Achievements:
                         </h4>
