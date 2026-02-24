@@ -135,7 +135,7 @@ const About = () => {
                 {/* Main Container */}
                 <div className="relative bg-pastel-fog dark:bg-dark-800 rounded-3xl overflow-hidden aspect-square shadow-xl border border-pastel-powder/30 flex items-center justify-center">
                   <motion.img
-                    src="/khushwant.png"
+                    src={`${process.env.PUBLIC_URL}/khushwant.png`}
                     alt="Professional Photograph"
                     className="w-3/4 h-3/4 object-cover rounded-2xl shadow-lg"
                     whileHover={{ scale: 1.15, y: -5 }}
