@@ -6,6 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('#home');
   const { darkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -14,6 +15,60 @@ const Navigation = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const sectionIds = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+    let ticking = false;
+
+    const updateActiveSection = () => {
+      const sections = sectionIds
+        .map((id) => ({ id, element: document.getElementById(id) }))
+        .filter((item) => item.element);
+
+      if (!sections.length) return;
+
+      const navProbeLine = 140;
+      let currentSection = '#home';
+
+      for (const section of sections) {
+        const rect = section.element.getBoundingClientRect();
+        if (rect.top <= navProbeLine) {
+          currentSection = `#${section.id}`;
+        }
+      }
+
+      const firstSectionRect = sections[0].element.getBoundingClientRect();
+      if (firstSectionRect.top > navProbeLine) {
+        currentSection = `#${sections[0].id}`;
+      }
+
+      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (nearBottom) {
+        currentSection = '#contact';
+      }
+
+      setActiveSection((prev) => (prev === currentSection ? prev : currentSection));
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', updateActiveSection);
+    };
   }, []);
 
   const navItems = [
@@ -27,6 +82,7 @@ const Navigation = () => {
 
   const handleNavClick = (href) => {
     setIsOpen(false);
+    setActiveSection(href);
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -44,17 +100,17 @@ const Navigation = () => {
           : 'bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg shadow-md border border-pastel-blue/20 dark:border-pastel-powder/10'
           } rounded-2xl`}
           style={{
-            backdropFilter: 'blur(5px)',
-            WebkitBackdropFilter: 'blur(5px)',
+            backdropFilter: 'blur(4px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(4px) saturate(160%)',
           }}
         >
-          <div className={`flex justify-between items-center transition-all duration-300 px-6 ${scrolled ? 'h-16' : 'h-20'
+          <div className={`flex justify-between items-center transition-all duration-300 px-4 sm:px-6 ${scrolled ? 'h-14 md:h-16' : 'h-16 md:h-20'
             }`}>
             {/* Logo */}
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="font-display font-bold text-2xl cursor-pointer"
+              className="font-display font-bold text-xl md:text-2xl cursor-pointer"
               onClick={() => handleNavClick('#home')}
             >
               <span className="text-text-primary dark:text-white">
@@ -74,9 +130,19 @@ const Navigation = () => {
                     handleNavClick(item.href);
                   }}
                   href={item.href}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-text-secondary dark:text-gray-300 hover:bg-pastel-blue/20 dark:hover:bg-pastel-powder/10 hover:text-text-primary dark:hover:text-white transition-all"
+                  className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSection === item.href
+                    ? 'text-text-primary dark:text-white'
+                    : 'text-text-secondary dark:text-gray-300 hover:text-text-primary dark:hover:text-white'
+                    }`}
                 >
                   {item.name}
+                  {activeSection === item.href && (
+                    <motion.span
+                      layoutId="activeNavUnderline"
+                      className="absolute left-4 right-4 -bottom-0.5 h-0.5 rounded-full bg-pastel-blue dark:bg-pastel-powder"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
                 </motion.a>
               ))}
 
@@ -98,7 +164,7 @@ const Navigation = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9, rotate: 180 }}
                 onClick={toggleTheme}
-                className="p-2 rounded-xl bg-pastel-lavender/30 hover:bg-pastel-lavender/50 text-text-primary dark:text-gray-300 transition-all"
+                className="h-10 w-10 inline-flex items-center justify-center rounded-xl border border-pastel-blue/25 dark:border-pastel-powder/20 bg-pastel-lavender/25 hover:bg-pastel-lavender/40 text-text-primary dark:text-gray-300 transition-all"
                 aria-label="Toggle theme"
               >
                 {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
@@ -108,7 +174,7 @@ const Navigation = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-xl bg-pastel-lavender/30 hover:bg-pastel-lavender/50 text-text-primary dark:text-gray-300 transition-all"
+                className="h-10 w-10 inline-flex items-center justify-center rounded-xl border border-pastel-blue/25 dark:border-pastel-powder/20 bg-pastel-lavender/25 hover:bg-pastel-lavender/40 text-text-primary dark:text-gray-300 transition-all"
                 aria-label="Toggle menu"
               >
                 {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
@@ -125,25 +191,38 @@ const Navigation = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="md:hidden bg-white/90 dark:bg-dark-900/90 backdrop-blur-xl border-t border-white/20 dark:border-white/10"
+              className={`md:hidden mt-2 mx-1 rounded-2xl overflow-hidden ${scrolled
+                ? 'bg-white/45 dark:bg-dark-900/45 backdrop-blur-md border border-pastel-blue/25 dark:border-pastel-powder/20'
+                : 'bg-white/35 dark:bg-dark-900/35 backdrop-blur-sm border border-pastel-blue/20 dark:border-pastel-powder/15'
+                } shadow-lg`}
+              style={{
+                backdropFilter: 'blur(10px) saturate(160%)',
+                WebkitBackdropFilter: 'blur(10px) saturate(160%)',
+              }}
             >
-              <div className="px-4 py-6 space-y-1">
+              <div className="px-3 py-3 space-y-1">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    whileHover={{ x: 10, backgroundColor: 'rgba(167, 199, 231, 0.2)' }}
+                    whileHover={{ x: 4 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={(e) => {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
                     href={item.href}
-                    className="block text-text-secondary dark:text-gray-300 hover:text-text-primary dark:hover:text-white transition-colors font-medium py-3 px-4 rounded-xl"
+                    className={`relative block transition-colors text-base font-semibold py-3.5 px-4 rounded-xl ${activeSection === item.href
+                      ? 'text-text-primary dark:text-white'
+                      : 'text-text-secondary dark:text-gray-300 hover:text-text-primary dark:hover:text-white'
+                      }`}
                   >
                     {item.name}
+                    {activeSection === item.href && (
+                      <span className="absolute left-4 right-4 bottom-1.5 h-0.5 rounded-full bg-pastel-blue dark:bg-pastel-powder" />
+                    )}
                   </motion.a>
                 ))}
               </div>
