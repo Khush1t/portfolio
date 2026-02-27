@@ -1,8 +1,6 @@
-import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { FiArrowRight, FiGithub, FiLinkedin, FiMail, FiDownload } from 'react-icons/fi';
-import Hero3DBackground from './Hero3D';
 
 const Hero = () => {
   const handleScroll = (id) => {
@@ -38,11 +36,11 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-pastel-fog dark:bg-dark-900"
     >
       {/* 3D Background - Subtle */}
-      <Suspense fallback={null}>
+      {/* <Suspense fallback={null}>
         <div className="opacity-30">
           <Hero3DBackground />
         </div>
-      </Suspense>
+      </Suspense> */}
 
       {/* Soft Pastel Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -58,15 +56,6 @@ const Hero = () => {
           animate="visible"
           className="max-w-4xl mx-auto text-center"
         >
-          {/* Status Badge */}
-          <motion.div variants={itemVariants} className="mb-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 dark:bg-dark-800/90 backdrop-blur-sm border border-pastel-mint/30 shadow-sm">
-              <div className="w-2 h-2 rounded-full bg-pastel-mint animate-pulse" />
-              <span className="text-sm font-medium text-text-primary dark:text-gray-300">
-                Available for opportunities
-              </span>
-            </div>
-          </motion.div>
 
           {/* Main Heading - Large & Bold */}
           <motion.h1

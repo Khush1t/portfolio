@@ -8,14 +8,13 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ScrollProgress from './components/ScrollProgress';
 import './App.css';
 
 function App() {
   return (
     <ThemeProvider>
       <div className="bg-white dark:bg-dark-900 text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
-        <ScrollProgress />
+        {/* <ScrollProgress /> */}
         <Navigation />
         <main>
           <Hero />
