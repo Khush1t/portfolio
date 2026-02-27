@@ -474,8 +474,8 @@ const Skills = () => {
     const directionX = velocityX / directionNorm;
     const directionY = velocityY / directionNorm;
 
-    const rippleRadius = 180 + speedFactor * 170;
-    const baseImpulse = 8 + speedFactor * 8;
+    const rippleRadius = 100 + speedFactor * 80;
+    const baseImpulse = 5.5 + speedFactor * 5.5;
 
     freeBodiesRef.current = freeBodiesRef.current.map((body) => {
       const deltaX = body.x - cursorX;
@@ -491,12 +491,12 @@ const Skills = () => {
       const normalizeX = deltaX / distance;
       const normalizeY = deltaY / distance;
       const alignment = Math.max(0, normalizeX * directionX + normalizeY * directionY);
-      const impulse = baseImpulse * falloff * (0.85 + alignment * 0.55);
+      const impulse = baseImpulse * falloff * (0.8 + alignment * 0.4);
 
       const nextBody = { ...body };
-      nextBody.vx += normalizeX * impulse * 0.34 + directionX * impulse * 0.2;
-      nextBody.vy += normalizeY * impulse * 0.18 + directionY * impulse * 0.1;
-      nextBody.vy -= impulse * 1.05;
+      nextBody.vx += normalizeX * impulse * 0.24 + directionX * impulse * 0.14;
+      nextBody.vy += normalizeY * impulse * 0.12 + directionY * impulse * 0.06;
+      nextBody.vy -= impulse * 0.62;
       nextBody.omega = 0;
 
       const clamped = clampFreePosition({ x: nextBody.x, y: nextBody.y }, bounds, freeMetrics);
@@ -564,8 +564,7 @@ const Skills = () => {
 
           <motion.div variants={itemVariants}>
             <div
-              className={`relative mx-auto w-full max-w-[66rem] rounded-4xl border border-gray-200 dark:border-dark-700 bg-white/70 dark:bg-dark-900/60 backdrop-blur-sm shadow-premium overflow-hidden ${mode === 'grid' ? 'h-[520px] sm:h-[580px] md:h-[620px]' : 'h-[460px] sm:h-[500px] md:h-[540px]'
-                }`}
+              className={`relative mx-auto w-full max-w-[66rem] rounded-4xl border border-gray-200 dark:border-dark-700 bg-white/70 dark:bg-dark-900/60 backdrop-blur-sm shadow-premium overflow-hidden ${mode === 'grid' ? 'h-[470px] sm:h-[530px] md:h-[570px]' : 'h-[430px] sm:h-[470px] md:h-[510px]'}`}
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.08),transparent_45%)] dark:bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.12),transparent_45%)]" />
 
