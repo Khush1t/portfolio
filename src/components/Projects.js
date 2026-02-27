@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiGithub, FiExternalLink, FiCode } from 'react-icons/fi';
+import { FiGithub, FiExternalLink, FiCode, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -9,76 +9,129 @@ const Projects = () => {
     threshold: 0.1,
   });
 
-  const [filter, setFilter] = useState('all');
+  const [imageErrors, setImageErrors] = useState({});
+  const sliderRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-featured e-commerce platform with real-time inventory management, secure payment integration, and admin dashboard.',
-      image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=500&fit=crop',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      category: 'fullstack',
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'portfolio',
+      description: 'My personal portfolio website built to showcase projects, skills, and experience.',
+      image: null,
+      tech: ['JavaScript', 'React', 'Tailwind CSS'],
+      github: 'https://github.com/Khush1t/portfolio',
+      live: 'https://khush1t.github.io/portfolio/',
     },
     {
       id: 2,
-      title: 'AI-Powered Analytics Dashboard',
-      description: 'Real-time data visualization dashboard with machine learning predictions and customizable widgets for business intelligence.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
-      tech: ['React', 'Python', 'TensorFlow', 'PostgreSQL'],
-      category: 'frontend',
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'Feasto',
+      description: 'A full-stack MERN food delivery application with user-facing ordering flows and backend data handling.',
+      image: null,
+      tech: ['JavaScript', 'MongoDB', 'Express', 'React', 'Node.js'],
+      github: 'https://github.com/Khush1t/Feasto',
+      live: null,
     },
     {
       id: 3,
-      title: 'Social Media App',
-      description: 'A modern social networking platform with real-time messaging, post sharing, and personalized feed algorithms.',
-      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=500&fit=crop',
-      tech: ['Next.js', 'GraphQL', 'PostgreSQL', 'Redis'],
-      category: 'fullstack',
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'orderbook-depth-3d-visualizer',
+      description: 'A Next.js app for visualizing real-time cryptocurrency orderbook data in 3D with live updates and venue filtering.',
+      image: 'https://github.com/user-attachments/assets/3178fee4-255f-49f4-b377-b833de7959b0',
+      tech: ['TypeScript', 'Next.js', 'Three.js', 'Binance API'],
+      github: 'https://github.com/Khush1t/orderbook-depth-3d-visualizer',
+      live: null,
     },
     {
       id: 4,
-      title: 'Task Management System',
-      description: 'Collaborative project management tool with kanban boards, time tracking, and team communication features.',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop',
-      tech: ['React', 'Firebase', 'Tailwind CSS'],
-      category: 'frontend',
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'Quizzler',
+      description: 'A Flutter-based MCQ quiz application built for Bharat Parv 23 with a complete quiz and result flow.',
+      image: 'https://github.com/user-attachments/assets/de061829-8218-45c3-8c03-b819230cf088',
+      tech: ['Dart', 'Flutter'],
+      github: 'https://github.com/Khush1t/Quizzler',
+      live: null,
     },
     {
       id: 5,
-      title: 'Weather Forecast App',
-      description: 'Beautiful weather application with hourly and weekly forecasts, interactive maps, and location-based alerts.',
-      image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&h=500&fit=crop',
-      tech: ['React', 'OpenWeather API', 'Chart.js'],
-      category: 'frontend',
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'Netflix-Clone',
+      description: 'A Netflix-inspired frontend clone project created while learning modern web development fundamentals.',
+      image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&h=800&fit=crop',
+      tech: ['HTML', 'CSS', 'JavaScript'],
+      github: 'https://github.com/Khush1t/Netflix-Clone',
+      live: null,
     },
     {
       id: 6,
-      title: 'REST API & Microservices',
-      description: 'Scalable microservices architecture with containerized services, load balancing, and comprehensive API documentation.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop',
-      tech: ['Node.js', 'Docker', 'Kubernetes', 'MongoDB'],
-      category: 'backend',
-      github: 'https://github.com',
+      title: 'Project-FLIGHT',
+      description: 'A web project from my early portfolio of work focused on practical frontend implementation.',
+      image: null,
+      tech: ['HTML', 'Python', 'JavaScript'],
+      github: 'https://github.com/Khush1t/Project-FLIGHT',
+      live: null,
+    },
+    {
+      id: 7,
+      title: 'ToDo-app',
+      description: 'A task management application focused on core CRUD functionality and clean interaction flow.',
+      image: 'https://github.com/Khush1t/ToDo-app/assets/76950403/5278ab56-2f7a-4da8-af2e-bffc9133bc80',
+      tech: ['Dart', 'Flutter'],
+      github: 'https://github.com/Khush1t/ToDo-app',
+      live: null,
+    },
+    {
+      id: 8,
+      title: 'SpendWise',
+      description: 'A Flutter expense tracker with income/expense flows and Google Sheets API integration for sheet-based data storage.',
+      image: 'https://github.com/Khush1t/SpendWise/assets/76950403/956f02a3-94e0-4872-96a3-de76b22f701a',
+      tech: ['Dart', 'Flutter', 'Google Sheets API'],
+      github: 'https://github.com/Khush1t/SpendWise',
+      live: null,
+    },
+    {
+      id: 9,
+      title: 'xylophone',
+      description: 'A sound-based mobile app project built to practice UI interactions and audio integration basics.',
+      image: null,
+      tech: ['Dart', 'Flutter'],
+      github: 'https://github.com/Khush1t/xylophone',
       live: null,
     },
   ];
 
-  const categories = ['all', 'fullstack', 'frontend', 'backend'];
+  const scrollProjects = (direction) => {
+    if (!sliderRef.current) return;
 
-  const filteredProjects = filter === 'all'
-    ? projects
-    : projects.filter(project => project.category === filter);
+    const firstCard = sliderRef.current.querySelector('.project-card');
+    const gap = 24;
+    const scrollAmount = firstCard ? firstCard.clientWidth + gap : 380;
+
+    sliderRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const updateScrollState = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = slider;
+      const maxScrollLeft = scrollWidth - clientWidth;
+      const tolerance = 2;
+      setCanScrollLeft(scrollLeft > tolerance);
+      setCanScrollRight(scrollLeft < maxScrollLeft - tolerance);
+    };
+
+    updateScrollState();
+    slider.addEventListener('scroll', updateScrollState);
+    window.addEventListener('resize', updateScrollState);
+
+    return () => {
+      slider.removeEventListener('scroll', updateScrollState);
+      window.removeEventListener('resize', updateScrollState);
+    };
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -124,117 +177,158 @@ const Projects = () => {
               Featured <span className="gradient-text">Projects</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              A showcase of my recent work and personal projects
+              Handpicked projects from my GitHub repositories
             </p>
             <div className="w-20 h-1 bg-gradient-to-r from-primary-600 to-purple-600 mx-auto rounded-full mt-4" />
           </motion.div>
 
-          {/* Filter Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setFilter(category)}
-                className={`px-6 py-2 rounded-full font-medium capitalize transition-all ${filter === category
-                    ? 'bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-lg'
-                    : 'bg-gray-200 dark:bg-dark-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-dark-700'
-                  }`}
-              >
-                {category}
-              </motion.button>
-            ))}
-          </motion.div>
-
-          {/* Projects Grid */}
+          {/* Projects Slider */}
           <motion.div
-            layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={itemVariants}
+            className="relative overflow-hidden"
           >
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="group relative bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+            {canScrollLeft && (
+              <button
+                type="button"
+                onClick={() => scrollProjects('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 dark:bg-dark-800/90 text-gray-900 dark:text-white shadow-lg hover:scale-105 transition"
+                aria-label="Previous projects"
               >
-                {/* Project Image */}
-                <div className="relative h-48 overflow-hidden bg-gray-200 dark:bg-dark-700">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <FiChevronLeft size={20} />
+              </button>
+            )}
 
-                  {/* Action Buttons on Hover */}
-                  <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    {project.github && (
-                      <motion.a
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white dark:bg-dark-900 rounded-full text-gray-900 dark:text-white shadow-lg"
-                        aria-label="View GitHub repository"
-                      >
-                        <FiGithub size={20} />
-                      </motion.a>
-                    )}
-                    {project.live && (
-                      <motion.a
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white dark:bg-dark-900 rounded-full text-gray-900 dark:text-white shadow-lg"
-                        aria-label="View live demo"
-                      >
-                        <FiExternalLink size={20} />
-                      </motion.a>
-                    )}
-                  </div>
-                </div>
+            {canScrollRight && (
+              <button
+                type="button"
+                onClick={() => scrollProjects('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 dark:bg-dark-800/90 text-gray-900 dark:text-white shadow-lg hover:scale-105 transition"
+                aria-label="Next projects"
+              >
+                <FiChevronRight size={20} />
+              </button>
+            )}
 
-                {/* Project Content */}
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                      <FiCode className="text-primary-600 dark:text-primary-400" size={20} />
-                    </div>
-                  </div>
+            <div
+              ref={sliderRef}
+              className="flex gap-6 overflow-x-auto scroll-smooth px-12 pb-3 no-scrollbar"
+            >
+              {projects.map((project, index) => (
+                (() => {
+                  const projectKey = `${project.id}-${index}`;
+                  const showImage = project.image && !imageErrors[projectKey];
+                  const isMobileApp = project.tech.includes('Flutter');
 
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
+                  return (
+                    <motion.div
+                      key={projectKey}
+                      whileHover={{ y: -8 }}
+                      className="project-card group relative shrink-0 w-[320px] sm:w-[360px] bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                    >
+                      <div className="relative h-48 overflow-hidden bg-gray-200 dark:bg-dark-700">
+                        {showImage ? (
+                          isMobileApp ? (
+                            <div className="w-full h-full flex items-center justify-center p-3 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-dark-700 dark:to-dark-800">
+                              <div className="h-full aspect-[9/19] rounded-[0.8rem] border-2 border-gray-900 dark:border-black overflow-hidden shadow-xl bg-black">
+                                <img
+                                  src={project.image}
+                                  alt={project.title}
+                                  onError={() =>
+                                    setImageErrors((prev) => ({
+                                      ...prev,
+                                      [projectKey]: true,
+                                    }))
+                                  }
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            <img
+                              src={project.image}
+                              alt={project.title}
+                              onError={() =>
+                                setImageErrors((prev) => ({
+                                  ...prev,
+                                  [projectKey]: true,
+                                }))
+                              }
+                              className="w-full h-full object-cover"
+                            />
+                          )
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary-700 via-primary-600 to-purple-600 flex flex-col items-center justify-center px-6 text-center">
+                            <div className="w-14 h-14 rounded-xl bg-white/20 text-white flex items-center justify-center mb-3">
+                              <FiCode size={26} />
+                            </div>
+                            <p className="text-white text-base font-semibold line-clamp-1">{project.title}</p>
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                  {/* Tech Stack Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          <motion.a
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3 bg-white dark:bg-dark-900 rounded-full text-gray-900 dark:text-white shadow-lg"
+                            aria-label="View GitHub repository"
+                          >
+                            <FiGithub size={20} />
+                          </motion.a>
+                          {project.live && (
+                            <motion.a
+                              whileHover={{ scale: 1.2 }}
+                              whileTap={{ scale: 0.9 }}
+                              href={project.live}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3 bg-white dark:bg-dark-900 rounded-full text-gray-900 dark:text-white shadow-lg"
+                              aria-label="View live demo"
+                            >
+                              <FiExternalLink size={20} />
+                            </motion.a>
+                          )}
+                        </div>
+                      </div>
 
-                {/* Decorative gradient border */}
-                <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              </motion.div>
-            ))}
+                      <div className="p-6">
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                            {project.title}
+                          </h3>
+                          <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
+                            <FiCode className="text-primary-600 dark:text-primary-400" size={20} />
+                          </div>
+                        </div>
+
+                        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                          {project.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    </motion.div>
+                  );
+                })()
+              ))}
+            </div>
+
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white dark:from-dark-900 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white dark:from-dark-900 to-transparent" />
           </motion.div>
 
           {/* View More Button */}
@@ -253,6 +347,17 @@ const Projects = () => {
           </motion.div>
         </motion.div>
       </div>
+
+      <style>{`
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 };
