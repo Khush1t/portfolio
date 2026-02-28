@@ -87,16 +87,13 @@ const About = () => {
                     </p>
                   </div>
 
-                  <div>
-                    <h4 className="text-xl font-semibold text-text-primary dark:text-white mb-3">
-                      What I Bring
-                    </h4>
-                    <ul className="space-y-3">
+                  <div className="pt-1">
+                    <ul className="space-y-2.5">
                       {[
-                        'Hands-on expertise in Angular, React & Spring Boot',
-                        'Experience building scalable microservices and modern web apps',
-                        'Strong problem-solving mindset with a love for clean code',
-                        'Collaborative approach with a knack for learning and adapting quickly',
+                        'Hands-on expertise in Angular, React & Spring Boot.',
+                        'Experience building scalable microservices and modern web apps.',
+                        'Strong problem-solving mindset with a love for clean code.',
+                        'Collaborative approach with a knack for learning and adapting quickly.',
                         // 'A creative streak — whether doodling, designing, or solving Rubik’s cubes faster than most queries',
                       ].map((item, index) => (
                         <motion.li
@@ -104,14 +101,11 @@ const About = () => {
                           initial={{ opacity: 0, x: -20 }}
                           animate={inView ? { opacity: 1, x: 0 } : {}}
                           transition={{ delay: 0.5 + index * 0.1 }}
-                          className="flex items-center gap-3 text-text-secondary dark:text-gray-300"
+                          whileHover={{ x: 2 }}
+                          className="flex items-start gap-3 text-text-secondary dark:text-gray-300 py-2 border-b border-pastel-powder/25 dark:border-white/10 last:border-b-0"
                         >
-                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-pastel-mint flex items-center justify-center">
-                            <svg className="w-3 h-3 text-text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                            </svg>
-                          </div>
-                          <span>{item}</span>
+                          <span className="mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-pastel-powder dark:bg-pastel-mint/80" />
+                          <span className="leading-relaxed">{item}</span>
                         </motion.li>
                       ))}
                     </ul>
@@ -155,8 +149,7 @@ const About = () => {
                     <div className="text-sm text-text-muted dark:text-gray-400 font-medium">
                       Years Experience
                     </div>
-                  </div>
-                </motion.div>
+                  </div>                </motion.div>
               </div>
             </motion.div>
           </div>

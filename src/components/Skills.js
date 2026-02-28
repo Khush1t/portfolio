@@ -33,27 +33,43 @@ import {
 import { FaAws } from 'react-icons/fa';
 import { SiSubversion } from 'react-icons/si';
 
-const FREE_SIDE_PADDING = 8;
-const FREE_TOP_PADDING = 16;
-const FREE_BOTTOM_PADDING = 8;
-const MAX_TILT = 0;
+const SKILLS = [
+  { name: 'Angular', icon: FaAngular, color: '#C3002F' },
+  { name: 'React', icon: FaReact, color: '#61DAFB' },
+  { name: 'Java', icon: FaJava, color: '#007396' },
+  { name: 'Spring Boot', icon: SiSpringboot, color: '#6DB33F' },
+  { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+  { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+  { name: 'HTML5', icon: SiHtml5, color: '#E34F26' },
+  { name: 'CSS3', icon: SiCss3, color: '#1572B6' },
+  { name: 'Bootstrap', icon: SiBootstrap, color: '#7952B3' },
+  { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+  { name: 'Material-UI', icon: SiMaterialdesign, color: '#0081CB' },
+  { name: 'PrimeNG', icon: FaAngular, color: '#0C7C59' },
+  { name: 'REST APIs', icon: SiPostman, color: '#FF6C37' },
+  { name: 'Microservices', icon: SiSpringboot, color: '#FF5722' },
+  { name: 'SQL', icon: SiPostgresql, color: '#336791' },
+  { name: 'C/C++', icon: SiCplusplus, color: '#00599C' },
+  { name: 'Apache Kafka', icon: SiApachekafka, color: '#231F20' },
+  { name: 'Redis', icon: SiRedis, color: '#DC382D' },
+  { name: 'JWT / OAuth 2.0', icon: SiJsonwebtokens, color: '#000000' },
+  { name: 'Log4j2', icon: FaJava, color: '#FF0000' },
+  { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
+  { name: 'IntelliJ IDEA', icon: SiIntellijidea, color: '#000000' },
+  { name: 'VS Code', icon: SiVscodium, color: '#007ACC' },
+  { name: 'AWS (EC2, RDS, S3)', icon: FaAws, color: '#FF9900' },
+  { name: 'Git/GitHub', icon: FaGitAlt, color: '#F05032' },
+  { name: 'SVN', icon: SiSubversion, color: '#809CC9' },
+  { name: 'CI/CD (basic)', icon: FaGitAlt, color: '#00C853' },
+];
 
-const getFreeBounds = (bounds, metrics) => {
-  const { cardWidth, cardHeight } = metrics;
-
-  const rotationInset =
-    (Math.abs(cardWidth * Math.cos(MAX_TILT)) + Math.abs(cardHeight * Math.sin(MAX_TILT)) - cardWidth) /
-    2;
-
-  return {
-    minX: -bounds.width / 2 + cardWidth / 2 + FREE_SIDE_PADDING + rotationInset,
-    maxX: bounds.width / 2 - cardWidth / 2 - FREE_SIDE_PADDING - rotationInset,
-    minY: -bounds.height / 2 + cardHeight / 2 + FREE_TOP_PADDING,
-    maxY: bounds.height / 2 - cardHeight / 2 - FREE_BOTTOM_PADDING,
-  };
+const FREE_PADDING = {
+  side: 8,
+  top: 16,
+  bottom: 8,
 };
 
-const getFreeMetrics = (width) => {
+const getMetrics = (width) => {
   if (width < 420) {
     return { cardWidth: 120, cardHeight: 44, gapX: 8, gapY: 8 };
   }
@@ -65,17 +81,36 @@ const getFreeMetrics = (width) => {
   return { cardWidth: 146, cardHeight: 54, gapX: 10, gapY: 10 };
 };
 
-const clampFreePosition = (position, bounds, metrics) => {
-  if (!bounds.width || !bounds.height) return position;
-  const { minX, maxX, minY, maxY } = getFreeBounds(bounds, metrics);
+const getSurpriseMetrics = (width) => {
+  if (width < 640) {
+    return { cardWidth: 52, cardHeight: 52, gapX: 10, gapY: 10 };
+  }
+
+  return getMetrics(width);
+};
+
+const getLimits = (bounds, metrics) => {
+  const { cardWidth, cardHeight } = metrics;
 
   return {
-    x: Math.max(minX, Math.min(maxX, position.x)),
-    y: Math.max(minY, Math.min(maxY, position.y)),
+    minX: -bounds.width / 2 + cardWidth / 2 + FREE_PADDING.side,
+    maxX: bounds.width / 2 - cardWidth / 2 - FREE_PADDING.side,
+    minY: -bounds.height / 2 + cardHeight / 2 + FREE_PADDING.top,
+    maxY: bounds.height / 2 - cardHeight / 2 - FREE_PADDING.bottom,
   };
 };
 
-const createFreeBodies = (count, bounds, metrics, previousBodies = []) => {
+const clampPoint = (point, bounds, metrics) => {
+  if (!bounds.width || !bounds.height) return point;
+  const { minX, maxX, minY, maxY } = getLimits(bounds, metrics);
+
+  return {
+    x: Math.max(minX, Math.min(maxX, point.x)),
+    y: Math.max(minY, Math.min(maxY, point.y)),
+  };
+};
+
+const createBodies = (count, bounds, metrics, previousBodies = []) => {
   const { cardWidth, cardHeight, gapX, gapY } = metrics;
 
   if (!bounds.width || !bounds.height) {
@@ -84,8 +119,6 @@ const createFreeBodies = (count, bounds, metrics, previousBodies = []) => {
       y: -120 + Math.floor(index / 4) * (cardHeight + gapY),
       vx: 0,
       vy: 0,
-      angle: 0,
-      omega: 0,
       width: cardWidth,
       height: cardHeight,
     }));
@@ -93,7 +126,7 @@ const createFreeBodies = (count, bounds, metrics, previousBodies = []) => {
 
   if (previousBodies.length === count) {
     return previousBodies.map((body) => {
-      const clamped = clampFreePosition({ x: body.x, y: body.y }, bounds, metrics);
+      const clamped = clampPoint({ x: body.x, y: body.y }, bounds, metrics);
       return {
         ...body,
         x: clamped.x,
@@ -104,10 +137,10 @@ const createFreeBodies = (count, bounds, metrics, previousBodies = []) => {
     });
   }
 
-  const usableWidth = Math.max(0, bounds.width - FREE_SIDE_PADDING * 2);
+  const usableWidth = Math.max(0, bounds.width - FREE_PADDING.side * 2);
   const cols = Math.max(2, Math.min(8, Math.floor((usableWidth + gapX) / (cardWidth + gapX))));
   const rows = Math.ceil(count / cols);
-  const { minX, maxX, minY } = getFreeBounds(bounds, metrics);
+  const { minX, maxX, minY } = getLimits(bounds, metrics);
   const startY = minY + 8;
 
   return Array.from({ length: count }, (_, index) => {
@@ -121,15 +154,13 @@ const createFreeBodies = (count, bounds, metrics, previousBodies = []) => {
         : minX + (col * (maxX - minX)) / (itemsInRow - 1);
     const y = startY + row * (cardHeight + gapY);
 
-    const clamped = clampFreePosition({ x, y }, bounds, metrics);
+    const clamped = clampPoint({ x, y }, bounds, metrics);
 
     return {
       x: clamped.x,
       y: clamped.y,
       vx: 0,
       vy: 0,
-      angle: 0,
-      omega: 0,
       width: cardWidth,
       height: cardHeight,
     };
@@ -144,63 +175,13 @@ const Skills = () => {
 
   const [mode, setMode] = useState('free');
   const [bounds, setBounds] = useState({ width: 0, height: 0 });
-  const [freePositions, setFreePositions] = useState([]);
+  const [positions, setPositions] = useState([]);
 
   const dragAreaRef = useRef(null);
   const animationFrameRef = useRef(null);
-  const freeBodiesRef = useRef([]);
+  const bodiesRef = useRef([]);
   const lastPointerRef = useRef({ x: 0, y: 0, time: 0 });
   const pointerVelocityRef = useRef({ x: 0, y: 0 });
-
-  const skillCategories = [
-    {
-      title: 'Frontend',
-      skills: [
-        { name: 'Angular', icon: FaAngular, color: '#C3002F', level: 90 },
-        { name: 'React', icon: FaReact, color: '#61DAFB', level: 92 },
-        { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E', level: 95 },
-        { name: 'TypeScript', icon: SiTypescript, color: '#3178C6', level: 90 },
-        { name: 'HTML5', icon: SiHtml5, color: '#E34F26', level: 95 },
-        { name: 'CSS3', icon: SiCss3, color: '#1572B6', level: 95 },
-        { name: 'Bootstrap', icon: SiBootstrap, color: '#7952B3', level: 85 },
-        { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4', level: 90 },
-        { name: 'Material-UI', icon: SiMaterialdesign, color: '#0081CB', level: 85 },
-        { name: 'PrimeNG', icon: FaAngular, color: '#0C7C59', level: 80 },
-      ],
-    },
-    {
-      title: 'Backend',
-      skills: [
-        { name: 'Java', icon: FaJava, color: '#007396', level: 90 },
-        { name: 'Spring Boot', icon: SiSpringboot, color: '#6DB33F', level: 88 },
-        { name: 'REST APIs', icon: SiPostman, color: '#FF6C37', level: 92 },
-        { name: 'Microservices', icon: SiSpringboot, color: '#FF5722', level: 85 },
-        { name: 'SQL', icon: SiPostgresql, color: '#336791', level: 87 },
-        { name: 'C/C++', icon: SiCplusplus, color: '#00599C', level: 80 },
-      ],
-    },
-    {
-      title: 'Tools & Platforms',
-      skills: [
-        { name: 'Apache Kafka', icon: SiApachekafka, color: '#231F20', level: 80 },
-        { name: 'Redis', icon: SiRedis, color: '#DC382D', level: 82 },
-        { name: 'JWT / OAuth 2.0', icon: SiJsonwebtokens, color: '#000000', level: 85 },
-        { name: 'Log4j2', icon: FaJava, color: '#FF0000', level: 75 },
-        { name: 'Postman', icon: SiPostman, color: '#FF6C37', level: 90 },
-        { name: 'IntelliJ IDEA', icon: SiIntellijidea, color: '#000000', level: 88 },
-        { name: 'VS Code', icon: SiVscodium, color: '#007ACC', level: 92 },
-      ],
-    },
-    {
-      title: 'DevOps & Cloud',
-      skills: [
-        { name: 'AWS (EC2, RDS, S3)', icon: FaAws, color: '#FF9900', level: 80 },
-        { name: 'Git/GitHub', icon: FaGitAlt, color: '#F05032', level: 95 },
-        { name: 'SVN', icon: SiSubversion, color: '#809CC9', level: 75 },
-        { name: 'CI/CD (basic)', icon: FaGitAlt, color: '#00C853', level: 70 },
-      ],
-    },
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -224,15 +205,12 @@ const Skills = () => {
     },
   };
 
-  const allSkills = skillCategories.flatMap((category) =>
-    category.skills.map((skill) => ({
-      ...skill,
-      category: category.title,
-    }))
+  const skillCount = SKILLS.length;
+  const metrics = useMemo(
+    () => (mode === 'free' ? getSurpriseMetrics(bounds.width) : getMetrics(bounds.width)),
+    [bounds.width, mode]
   );
-
-  const skillCount = allSkills.length;
-  const freeMetrics = useMemo(() => getFreeMetrics(bounds.width), [bounds.width]);
+  const isSurpriseMobile = mode === 'free' && bounds.width > 0 && bounds.width < 640;
 
   useEffect(() => {
     const area = dragAreaRef.current;
@@ -256,44 +234,39 @@ const Skills = () => {
   useEffect(() => {
     if (!bounds.width || !bounds.height) return;
 
-    freeBodiesRef.current = createFreeBodies(skillCount, bounds, freeMetrics, freeBodiesRef.current);
+    bodiesRef.current = createBodies(skillCount, bounds, metrics, bodiesRef.current);
 
-    setFreePositions(
-      freeBodiesRef.current.map((body) => ({
+    setPositions(
+      bodiesRef.current.map((body) => ({
         x: body.x,
         y: body.y,
-        angle: body.angle,
       }))
     );
-  }, [bounds, skillCount, freeMetrics]);
+  }, [bounds, skillCount, metrics]);
 
   useEffect(() => {
     if (mode !== 'free' || !bounds.width || !bounds.height) return undefined;
 
     const step = () => {
-      const { minX, maxX, minY, maxY } = getFreeBounds(bounds, freeMetrics);
+      const { minX, maxX, minY, maxY } = getLimits(bounds, metrics);
 
-      freeBodiesRef.current = freeBodiesRef.current.map((body) => {
+      bodiesRef.current = bodiesRef.current.map((body) => {
         const nextBody = { ...body };
         const gravity = 0.58;
 
         nextBody.vy += gravity;
         nextBody.vx *= 0.995;
         nextBody.vy *= 0.996;
-        nextBody.omega = 0;
 
         nextBody.x += nextBody.vx;
         nextBody.y += nextBody.vy;
-        nextBody.angle += nextBody.omega;
 
         if (nextBody.x < minX) {
           nextBody.x = minX;
           nextBody.vx *= -0.38;
-          nextBody.omega = 0;
         } else if (nextBody.x > maxX) {
           nextBody.x = maxX;
           nextBody.vx *= -0.38;
-          nextBody.omega = 0;
         }
 
         if (nextBody.y < minY) {
@@ -305,7 +278,6 @@ const Skills = () => {
           nextBody.y = maxY;
           if (nextBody.vy > 0) nextBody.vy *= -0.22;
           nextBody.vx *= 0.92;
-          nextBody.omega = 0;
 
           if (Math.abs(nextBody.vy) < 0.24) {
             nextBody.vy = 0;
@@ -317,16 +289,14 @@ const Skills = () => {
 
         }
 
-        nextBody.angle = 0;
-
         return nextBody;
       });
 
       for (let pass = 0; pass < 6; pass += 1) {
-        for (let i = 0; i < freeBodiesRef.current.length; i += 1) {
-          for (let j = i + 1; j < freeBodiesRef.current.length; j += 1) {
-            const bodyA = freeBodiesRef.current[i];
-            const bodyB = freeBodiesRef.current[j];
+        for (let i = 0; i < bodiesRef.current.length; i += 1) {
+          for (let j = i + 1; j < bodiesRef.current.length; j += 1) {
+            const bodyA = bodiesRef.current[i];
+            const bodyB = bodiesRef.current[j];
 
             const deltaX = bodyB.x - bodyA.x;
             const deltaY = bodyB.y - bodyA.y;
@@ -357,16 +327,13 @@ const Skills = () => {
               const impulse = relVY * 0.72;
               bodyA.vy += impulse * 0.5;
               bodyB.vy -= impulse * 0.5;
-
-              bodyA.omega = 0;
-              bodyB.omega = 0;
             }
 
-            const clampedA = clampFreePosition({ x: bodyA.x, y: bodyA.y }, bounds, freeMetrics);
+            const clampedA = clampPoint({ x: bodyA.x, y: bodyA.y }, bounds, metrics);
             bodyA.x = clampedA.x;
             bodyA.y = clampedA.y;
 
-            const clampedB = clampFreePosition({ x: bodyB.x, y: bodyB.y }, bounds, freeMetrics);
+            const clampedB = clampPoint({ x: bodyB.x, y: bodyB.y }, bounds, metrics);
             bodyB.x = clampedB.x;
             bodyB.y = clampedB.y;
           }
@@ -374,19 +341,19 @@ const Skills = () => {
       }
 
       // Hard containment: ensure all boxes stay within bounds
-      if (freeBodiesRef.current.length) {
+      if (bodiesRef.current.length) {
         // Find actual occupied edges (in physics coordinates, card edges not centers)
         let leftEdge = Infinity;
         let rightEdge = -Infinity;
 
-        for (const body of freeBodiesRef.current) {
+        for (const body of bodiesRef.current) {
           leftEdge = Math.min(leftEdge, body.x - body.width / 2);
           rightEdge = Math.max(rightEdge, body.x + body.width / 2);
         }
 
         // Container edges in physics coordinates
-        const containerLeft = -bounds.width / 2 + FREE_SIDE_PADDING;
-        const containerRight = bounds.width / 2 - FREE_SIDE_PADDING;
+        const containerLeft = -bounds.width / 2 + FREE_PADDING.side;
+        const containerRight = bounds.width / 2 - FREE_PADDING.side;
 
         // Calculate how much we need to shift to fit within container
         let shiftX = 0;
@@ -398,15 +365,15 @@ const Skills = () => {
 
         // Apply shift if needed
         if (Math.abs(shiftX) > 0.1) {
-          freeBodiesRef.current = freeBodiesRef.current.map((body) => ({
+          bodiesRef.current = bodiesRef.current.map((body) => ({
             ...body,
             x: body.x + shiftX,
           }));
         }
 
         // Final clamp to ensure everything is within bounds
-        freeBodiesRef.current = freeBodiesRef.current.map((body) => {
-          const clamped = clampFreePosition({ x: body.x, y: body.y }, bounds, freeMetrics);
+        bodiesRef.current = bodiesRef.current.map((body) => {
+          const clamped = clampPoint({ x: body.x, y: body.y }, bounds, metrics);
           return {
             ...body,
             x: clamped.x,
@@ -415,11 +382,10 @@ const Skills = () => {
         });
       }
 
-      setFreePositions(
-        freeBodiesRef.current.map((body) => ({
+      setPositions(
+        bodiesRef.current.map((body) => ({
           x: body.x,
           y: body.y,
-          angle: body.angle,
         }))
       );
 
@@ -433,17 +399,17 @@ const Skills = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [mode, bounds, freeMetrics]);
+  }, [mode, bounds, metrics]);
 
-  const applyRipple = (event) => {
+  const applyRippleAt = (clientX, clientY) => {
     if (mode !== 'free') return;
 
     const area = dragAreaRef.current;
     if (!area || !bounds.width || !bounds.height) return;
 
     const rect = area.getBoundingClientRect();
-    const cursorX = event.clientX - rect.left - rect.width / 2;
-    const cursorY = event.clientY - rect.top - rect.height / 2;
+    const cursorX = clientX - rect.left - rect.width / 2;
+    const cursorY = clientY - rect.top - rect.height / 2;
 
     const now = performance.now();
 
@@ -477,7 +443,7 @@ const Skills = () => {
     const rippleRadius = 100 + speedFactor * 80;
     const baseImpulse = 5.5 + speedFactor * 5.5;
 
-    freeBodiesRef.current = freeBodiesRef.current.map((body) => {
+    bodiesRef.current = bodiesRef.current.map((body) => {
       const deltaX = body.x - cursorX;
       const deltaY = body.y - cursorY;
       const distance = Math.max(1, Math.hypot(deltaX, deltaY));
@@ -497,14 +463,23 @@ const Skills = () => {
       nextBody.vx += normalizeX * impulse * 0.24 + directionX * impulse * 0.14;
       nextBody.vy += normalizeY * impulse * 0.12 + directionY * impulse * 0.06;
       nextBody.vy -= impulse * 0.62;
-      nextBody.omega = 0;
 
-      const clamped = clampFreePosition({ x: nextBody.x, y: nextBody.y }, bounds, freeMetrics);
+      const clamped = clampPoint({ x: nextBody.x, y: nextBody.y }, bounds, metrics);
       nextBody.x = clamped.x;
       nextBody.y = clamped.y;
 
       return nextBody;
     });
+  };
+
+  const applyRipple = (event) => {
+    applyRippleAt(event.clientX, event.clientY);
+  };
+
+  const applyRippleTouch = (event) => {
+    const touch = event.touches?.[0];
+    if (!touch) return;
+    applyRippleAt(touch.clientX, touch.clientY);
   };
 
   const resetPointerTrack = () => {
@@ -568,20 +543,24 @@ const Skills = () => {
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.08),transparent_45%)] dark:bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.12),transparent_45%)]" />
 
-              <div className={`absolute inset-0 ${mode === 'free' ? 'px-2 py-2 sm:py-3 sm:pb-0' : 'px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4'}`}>
+              <div className={`absolute inset-0 ${mode === 'free' ? 'px-2 py-2 sm:py-3 sm:pb-0' : 'px-1.5 sm:px-3 md:px-4 py-1.5 sm:py-3 md:py-4'}`}>
                 <div
                   ref={dragAreaRef}
-                  onPointerMove={applyRipple}
-                  onPointerLeave={resetPointerTrack}
+                  onPointerMove={mode === 'free' ? applyRipple : undefined}
+                  onTouchStart={mode === 'free' ? applyRippleTouch : undefined}
+                  onTouchMove={mode === 'free' ? applyRippleTouch : undefined}
+                  onTouchEnd={mode === 'free' ? resetPointerTrack : undefined}
+                  onTouchCancel={mode === 'free' ? resetPointerTrack : undefined}
+                  onPointerLeave={mode === 'free' ? resetPointerTrack : undefined}
                   className="relative w-full h-full"
                 >
                   {mode === 'grid' ? (
                     <div className="absolute inset-0 overflow-hidden">
                       <div className="h-full flex items-center justify-center py-0.5 sm:py-1">
-                        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1.5 sm:gap-2 md:gap-2.5 place-items-center">
-                          {allSkills.map((skill, index) => (
+                        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1 sm:gap-2 md:gap-2.5 place-items-center">
+                          {SKILLS.map((skill, index) => (
                             <motion.div
-                              key={`${skill.category}-${skill.name}`}
+                              key={skill.name}
                               initial={{ opacity: 0, y: 12, scale: 0.98 }}
                               animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
                               transition={{
@@ -595,11 +574,11 @@ const Skills = () => {
                               className="select-none"
                             >
                               <div
-                                className="box-border w-[110px] h-[44px] sm:w-[138px] sm:h-[52px] lg:w-[184px] lg:h-[62px] flex items-center gap-1.5 sm:gap-2 lg:gap-2.5 px-2 sm:px-3 lg:px-4 py-1 sm:py-1.5 lg:py-2 rounded-2xl border bg-white/95 dark:bg-dark-800/95 shadow-md hover:shadow-lg transition-shadow"
+                                className="box-border w-[100px] h-[42px] sm:w-[138px] sm:h-[52px] lg:w-[184px] lg:h-[62px] flex items-center gap-1 sm:gap-2 lg:gap-2.5 px-1.5 sm:px-3 lg:px-4 py-1 sm:py-1.5 lg:py-2 rounded-2xl border bg-white/95 dark:bg-dark-800/95 shadow-md hover:shadow-lg transition-shadow"
                                 style={{ borderColor: `${skill.color}88` }}
                               >
                                 <skill.icon size={16} style={{ color: skill.color }} />
-                                <p className="text-[11px] sm:text-xs lg:text-sm font-semibold text-gray-900 dark:text-white leading-tight whitespace-normal break-words">
+                                <p className="text-[10px] sm:text-xs lg:text-sm font-semibold text-gray-900 dark:text-white leading-tight whitespace-normal break-words">
                                   {skill.name}
                                 </p>
                               </div>
@@ -609,9 +588,9 @@ const Skills = () => {
                       </div>
                     </div>
                   ) : (
-                    allSkills.map((skill, index) => (
+                    SKILLS.map((skill, index) => (
                       <motion.div
-                        key={`${skill.category}-${skill.name}`}
+                        key={skill.name}
                         whileTap={{ scale: 0.98 }}
                         whileHover={{ scale: 1.02 }}
                         initial={{
@@ -624,9 +603,8 @@ const Skills = () => {
                           inView
                             ? {
                               opacity: 1,
-                              x: freePositions[index]?.x || 0,
-                              y: freePositions[index]?.y || 0,
-                              rotate: ((freePositions[index]?.angle || 0) * 180) / Math.PI,
+                              x: positions[index]?.x || 0,
+                              y: positions[index]?.y || 0,
                             }
                             : {}
                         }
@@ -638,25 +616,27 @@ const Skills = () => {
                         }}
                         className="absolute left-1/2 top-1/2 z-10 select-none"
                         style={{
-                          zIndex: 1000 + Math.round(freePositions[index]?.y || 0),
-                          marginLeft: -freeMetrics.cardWidth / 2,
-                          marginTop: -freeMetrics.cardHeight / 2,
+                          zIndex: 1000 + Math.round(positions[index]?.y || 0),
+                          marginLeft: -metrics.cardWidth / 2,
+                          marginTop: -metrics.cardHeight / 2,
                         }}
                       >
                         <div
-                          className="box-border flex items-center rounded-2xl border bg-white/95 dark:bg-dark-800/95 shadow-md hover:shadow-lg transition-shadow"
+                          className={`box-border flex items-center border bg-white/95 dark:bg-dark-800/95 shadow-md hover:shadow-lg transition-shadow ${isSurpriseMobile ? 'rounded-full justify-center' : 'rounded-2xl'}`}
                           style={{
                             borderColor: `${skill.color}88`,
-                            width: `${freeMetrics.cardWidth}px`,
-                            height: `${freeMetrics.cardHeight}px`,
-                            gap: freeMetrics.cardWidth < 130 ? '8px' : '10px',
-                            paddingInline: freeMetrics.cardWidth < 130 ? '12px' : '14px',
+                            width: `${metrics.cardWidth}px`,
+                            height: `${metrics.cardHeight}px`,
+                            gap: isSurpriseMobile ? '0px' : (metrics.cardWidth < 130 ? '8px' : '10px'),
+                            paddingInline: isSurpriseMobile ? '0px' : (metrics.cardWidth < 130 ? '12px' : '14px'),
                           }}
                         >
-                          <skill.icon size={freeMetrics.cardWidth < 130 ? 16 : 18} style={{ color: skill.color }} />
-                          <p className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis">
-                            {skill.name}
-                          </p>
+                          <skill.icon size={isSurpriseMobile ? 20 : (metrics.cardWidth < 130 ? 16 : 18)} style={{ color: skill.color }} />
+                          {!isSurpriseMobile && (
+                            <p className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis">
+                              {skill.name}
+                            </p>
+                          )}
                         </div>
                       </motion.div>
                     ))
