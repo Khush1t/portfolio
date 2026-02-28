@@ -98,7 +98,7 @@ const Navigation = () => {
         <div className={`max-w-6xl mx-auto transition-all duration-500 ${scrolled
           ? 'bg-white/80 dark:bg-dark-900/80 backdrop-blur-xl shadow-lg border border-pastel-blue/30 dark:border-pastel-powder/20'
           : 'bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg shadow-md border border-pastel-blue/20 dark:border-pastel-powder/10'
-          } rounded-2xl`}
+          } rounded-4xl`}
           style={{
             backdropFilter: 'blur(4px) saturate(160%)',
             WebkitBackdropFilter: 'blur(4px) saturate(160%)',
@@ -151,7 +151,7 @@ const Navigation = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9, rotate: 180 }}
                 onClick={toggleTheme}
-                className="ml-2 p-2.5 rounded-xl bg-pastel-lavender/30 hover:bg-pastel-lavender/50 text-text-primary dark:text-gray-300 transition-all"
+                className="ml-2 p-2.5 rounded-3xl bg-pastel-lavender/30 hover:bg-pastel-lavender/50 text-text-primary dark:text-gray-300 transition-all"
                 aria-label="Toggle theme"
               >
                 {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
@@ -164,7 +164,7 @@ const Navigation = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9, rotate: 180 }}
                 onClick={toggleTheme}
-                className="h-10 w-10 inline-flex items-center justify-center rounded-xl border border-pastel-blue/25 dark:border-pastel-powder/20 bg-pastel-lavender/25 hover:bg-pastel-lavender/40 text-text-primary dark:text-gray-300 transition-all"
+                className="h-10 w-10 inline-flex items-center justify-center rounded-3xl border border-pastel-blue/25 dark:border-pastel-powder/20 bg-pastel-lavender/25 hover:bg-pastel-lavender/40 text-text-primary dark:text-gray-300 transition-all"
                 aria-label="Toggle theme"
               >
                 {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
@@ -174,7 +174,7 @@ const Navigation = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="h-10 w-10 inline-flex items-center justify-center rounded-xl border border-pastel-blue/25 dark:border-pastel-powder/20 bg-pastel-lavender/25 hover:bg-pastel-lavender/40 text-text-primary dark:text-gray-300 transition-all"
+                className="h-10 w-10 inline-flex items-center justify-center rounded-3xl border border-pastel-blue/25 dark:border-pastel-powder/20 bg-pastel-lavender/25 hover:bg-pastel-lavender/40 text-text-primary dark:text-gray-300 transition-all"
                 aria-label="Toggle menu"
               >
                 {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
@@ -191,7 +191,7 @@ const Navigation = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className={`md:hidden mt-2 mx-1 rounded-2xl overflow-hidden ${scrolled
+              className={`md:hidden mt-2 mx-1 rounded-3xl overflow-hidden ${scrolled
                 ? 'bg-white/45 dark:bg-dark-900/45 backdrop-blur-md border border-pastel-blue/25 dark:border-pastel-powder/20'
                 : 'bg-white/35 dark:bg-dark-900/35 backdrop-blur-sm border border-pastel-blue/20 dark:border-pastel-powder/15'
                 } shadow-lg`}
