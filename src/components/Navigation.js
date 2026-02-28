@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FiSun, FiMoon, FiHome, FiUser, FiCode, FiGrid, FiBriefcase, FiMail } from 'react-icons/fi';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Navigation = () => {
@@ -109,11 +110,27 @@ const Navigation = () => {
     }
 
     setActiveSection(href);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    const target = document.querySelector(href);
+    if (target) {
+      const smoother = ScrollSmoother.get();
+      if (smoother) {
+        smoother.scrollTo(target, true, 'top top');
+      } else {
+        requestAnimationFrame(() => {
+          const nextSmoother = ScrollSmoother.get();
+          if (nextSmoother) {
+            nextSmoother.scrollTo(target, true, 'top top');
+          } else {
+            const targetTop = target.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: targetTop, behavior: 'smooth' });
+          }
+        });
+      }
+    }
 
     autoScrollTimerRef.current = setTimeout(() => {
       isAutoScrollingRef.current = false;
-    }, 700);
+    }, 1400);
   };
 
   const activeIndex = Math.max(0, navItems.findIndex((item) => item.href === activeSection));
@@ -177,8 +194,8 @@ const Navigation = () => {
         >
           <div
             className={`max-w-6xl mx-auto transition-all duration-500 ${scrolled
-              ? 'bg-white/80 dark:bg-dark-900/80 backdrop-blur-xl shadow-lg border border-pastel-blue/30 dark:border-pastel-powder/20'
-              : 'bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg shadow-md border border-pastel-blue/20 dark:border-pastel-powder/10'
+              ? 'bg-white/80 dark:bg-dark-900/80 backdrop-blur-xl shadow-lg border border-pastel-blue/30 dark:border-white/[0.1]'
+              : 'bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg shadow-md border border-pastel-blue/20 dark:border-white/[0.06]'
               } rounded-4xl`}
             style={{
               backdropFilter: 'blur(4px) saturate(160%)',
@@ -208,7 +225,7 @@ const Navigation = () => {
                     href={item.href}
                     className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSection === item.href
                       ? 'text-text-primary dark:text-white'
-                      : 'text-text-secondary dark:text-gray-300 hover:text-text-primary dark:hover:text-white'
+                      : 'text-text-secondary dark:text-gray-200 hover:text-text-primary dark:hover:text-white'
                       }`}
                   >
                     {item.name}
@@ -226,7 +243,7 @@ const Navigation = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9, rotate: 180 }}
                   onClick={toggleTheme}
-                  className="ml-2 p-2.5 rounded-3xl bg-pastel-lavender/30 hover:bg-pastel-lavender/50 text-text-primary dark:text-gray-300 transition-all"
+                  className="ml-2 p-2.5 rounded-3xl bg-pastel-lavender/50 hover:bg-pastel-lavender/70 dark:bg-pastel-lavender/70 dark:hover:bg-pastel-lavender/100 text-text-primary dark:text-dark-900 transition-all"
                   aria-label="Toggle theme"
                 >
                   {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
@@ -242,7 +259,7 @@ const Navigation = () => {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="md:hidden fixed top-0 left-0 right-0 z-50 border-b border-pastel-blue/25 dark:border-pastel-powder/15 bg-white/92 dark:bg-dark-900/85 shadow-[0_1px_8px_rgba(15,23,42,0.08)] dark:shadow-none"
+        className="md:hidden fixed top-0 left-0 right-0 z-50 border-b border-pastel-blue/25 dark:border-white/[0.08] bg-white/92 dark:bg-dark-900/85 shadow-[0_1px_8px_rgba(15,23,42,0.08)] dark:shadow-none"
         style={{
           backdropFilter: 'blur(8px) saturate(180%)',
           WebkitBackdropFilter: 'blur(8px) saturate(180%)',
@@ -259,7 +276,7 @@ const Navigation = () => {
           <motion.button
             whileTap={{ scale: 0.92, rotate: 180 }}
             onClick={toggleTheme}
-            className="h-9 w-9 inline-flex items-center justify-center rounded-2xl border border-pastel-blue/25 dark:border-pastel-powder/20 bg-pastel-lavender/25 text-text-primary dark:text-gray-300"
+            className="h-9 w-9 inline-flex items-center justify-center rounded-2xl border border-pastel-blue/25 dark:border-white/[0.14] bg-pastel-lavender/25 dark:bg-pastel-lavender/55 text-text-primary dark:text-dark-900"
             aria-label="Toggle theme"
           >
             {darkMode ? <FiSun size={17} /> : <FiMoon size={17} />}
@@ -314,7 +331,7 @@ const Navigation = () => {
                   onClick={() => handleNavClick(item.href)}
                   className={`h-11 rounded-2xl inline-flex items-center justify-center transition-colors ${isActive
                     ? 'text-slate-900 dark:text-white'
-                    : 'text-slate-700/70 dark:text-gray-300/80'
+                    : 'text-slate-700/70 dark:text-gray-200/90'
                     }`}
                   aria-label={item.name}
                 >

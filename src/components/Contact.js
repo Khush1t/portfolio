@@ -37,21 +37,27 @@ const Contact = () => {
       title: 'Email',
       value: 'khushwant0328@gmail.com',
       href: 'mailto:khushwant0328@gmail.com',
-      color: 'from-blue-500 to-cyan-500',
+      color: 'bg-pastel-powder/40 dark:bg-pastel-powder/45 text-text-primary dark:text-dark-900 border border-pastel-powder/50 dark:border-pastel-powder/60',
+      hoverCard: 'dark:hover:bg-pastel-powder/[0.24] dark:hover:border-pastel-powder/70',
+      hoverText: 'dark:group-hover:text-pastel-powder',
     },
     {
       icon: FiPhone,
       title: 'Phone',
       value: '+91 880 0170 875',
       href: 'tel:+918800170875',
-      color: 'from-green-500 to-emerald-500',
+      color: 'bg-pastel-mint/40 dark:bg-pastel-mint/45 text-text-primary dark:text-dark-900 border border-pastel-mint/50 dark:border-pastel-mint/60',
+      hoverCard: 'dark:hover:bg-pastel-mint/[0.22] dark:hover:border-pastel-mint/70',
+      hoverText: 'dark:group-hover:text-pastel-mint',
     },
     {
       icon: FiMapPin,
       title: 'Location',
       value: 'New Delhi, India',
       href: 'https://www.google.com/maps/place/New+Delhi,+Delhi,+India',
-      color: 'from-purple-500 to-pink-500',
+      color: 'bg-pastel-lavender/40 dark:bg-pastel-lavender/45 text-text-primary dark:text-dark-900 border border-pastel-lavender/50 dark:border-pastel-lavender/60',
+      hoverCard: 'dark:hover:bg-pastel-lavender/[0.26] dark:hover:border-pastel-lavender/70',
+      hoverText: 'dark:group-hover:text-pastel-lavender',
     },
   ];
 
@@ -60,19 +66,25 @@ const Contact = () => {
       icon: FiLinkedin,
       name: 'LinkedIn',
       href: 'https://linkedin.com/in/khush1t',
-      color: '#0077B5',
+      hoverBg: 'dark:hover:bg-pastel-blue/[0.28]',
+      hoverBorder: 'dark:hover:border-pastel-blue/70',
+      hoverIcon: 'dark:group-hover:text-pastel-blue',
     },
     {
       icon: FiGithub,
       name: 'GitHub',
       href: 'https://github.com/Khush1t',
-      color: '#333',
+      hoverBg: 'dark:hover:bg-pastel-powder/[0.26]',
+      hoverBorder: 'dark:hover:border-pastel-powder/70',
+      hoverIcon: 'dark:group-hover:text-pastel-powder',
     },
     {
       icon: FiTwitter,
       name: 'Twitter',
       href: 'https://x.com/Khush_1t',
-      color: '#1DA1F2',
+      hoverBg: 'dark:hover:bg-pastel-coral/[0.28]',
+      hoverBorder: 'dark:hover:border-pastel-coral/70',
+      hoverIcon: 'dark:group-hover:text-pastel-coral',
     },
   ];
 
@@ -225,12 +237,12 @@ const Contact = () => {
     <section
       id="contact"
       ref={ref}
-      className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900"
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-pastel-fog dark:bg-dark-900"
     >
       {/* Background Decoration */}
-      <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-primary-300/20 dark:bg-primary-700/15 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-purple-300/20 dark:bg-purple-700/15 blur-3xl" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.35),transparent_45%),radial-gradient(circle_at_80%_70%,rgba(14,165,233,0.12),transparent_40%)] dark:bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.06),transparent_45%),radial-gradient(circle_at_80%_70%,rgba(99,102,241,0.14),transparent_40%)]" />
+      <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-pastel-blue/20 dark:bg-pastel-blue/[0.12] blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-pastel-lavender/20 dark:bg-pastel-lavender/[0.12] blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-pastel-blue/10 dark:bg-pastel-blue/[0.06]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -240,13 +252,13 @@ const Contact = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="mb-12 text-center sm:mb-16">
-            <h2 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white">
-              Get In <span className="gradient-text">Touch</span>
+            <h2 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-display font-bold text-text-primary dark:text-white">
+              Get In Touch
             </h2>
-            <p className="mx-auto max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-300">
+            <p className="mx-auto max-w-2xl text-base sm:text-lg text-text-muted dark:text-gray-200">
               Have a project in mind? Let's discuss how we can work together
             </p>
-            <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-primary-600 to-purple-600" />
+            <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-pastel-blue dark:bg-pastel-powder" />
           </motion.div>
 
           <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
@@ -264,18 +276,18 @@ const Contact = () => {
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.3 + index * 0.1 }}
                     whileHover={{ scale: 1.02, x: 6 }}
-                    className="group flex items-center gap-4 rounded-2xl border border-gray-200/80 dark:border-dark-600 bg-white/80 dark:bg-dark-900/70 p-4 sm:p-5 backdrop-blur-xl shadow-sm hover:shadow-xl hover:border-primary-300/70 dark:hover:border-primary-600/60 transition-all"
+                    className={`group flex items-center gap-4 rounded-2xl border border-pastel-blue/30 dark:border-white/[0.16] bg-white/80 dark:bg-dark-800/85 p-4 sm:p-5 backdrop-blur-xl shadow-sm hover:shadow-xl hover:border-pastel-blue/50 ${info.hoverCard} transition-all`}
                   >
                     <div
-                      className={`rounded-xl bg-gradient-to-br ${info.color} p-3.5 shadow-lg shadow-black/10`}
+                      className={`rounded-xl ${info.color} p-3.5 shadow-lg shadow-black/10`}
                     >
-                      <info.icon className="text-white" size={24} />
+                      <info.icon size={24} />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="mb-1 text-sm sm:text-base font-semibold text-gray-900 dark:text-white">
+                      <h4 className="mb-1 text-sm sm:text-base font-semibold text-text-primary dark:text-white">
                         {info.title}
                       </h4>
-                      <p className="truncate text-sm sm:text-base text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-100 transition-colors">
+                      <p className={`truncate text-sm sm:text-base text-text-muted dark:text-gray-200 group-hover:text-text-primary ${info.hoverText} transition-colors`}>
                         {info.value}
                       </p>
                     </div>
@@ -286,9 +298,9 @@ const Contact = () => {
               {/* Social Links */}
               <motion.div
                 variants={itemVariants}
-                className="rounded-2xl border border-gray-200/80 dark:border-dark-600 bg-white/80 dark:bg-dark-900/70 p-5 sm:p-6 backdrop-blur-xl shadow-sm"
+                className="rounded-2xl border border-pastel-blue/30 dark:border-white/[0.16] bg-white/80 dark:bg-dark-800/85 p-5 sm:p-6 backdrop-blur-xl shadow-sm"
               >
-                <h4 className="mb-4 font-semibold text-gray-900 dark:text-white">
+                <h4 className="mb-4 font-semibold text-text-primary dark:text-white">
                   Connect with me
                 </h4>
                 <div className="flex flex-wrap gap-3">
@@ -300,12 +312,12 @@ const Contact = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group rounded-xl border border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-800/80 p-3.5 hover:bg-gradient-to-br hover:from-primary-500 hover:to-purple-600 hover:border-transparent shadow-sm transition-all"
+                      className={`group rounded-xl border border-pastel-blue/30 dark:border-white/[0.16] bg-pastel-fog dark:bg-dark-700/80 p-3.5 hover:bg-pastel-blue/20 ${social.hoverBg} hover:border-pastel-blue/50 ${social.hoverBorder} shadow-sm transition-all`}
                       aria-label={social.name}
                     >
                       <social.icon
                         size={22}
-                        className="text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors"
+                        className={`text-text-muted dark:text-gray-100 group-hover:text-text-primary ${social.hoverIcon} transition-colors`}
                       />
                     </motion.a>
                   ))}
@@ -315,17 +327,17 @@ const Contact = () => {
               {/* Availability Badge */}
               <motion.div
                 variants={itemVariants}
-                className="rounded-2xl border border-emerald-300/60 dark:border-emerald-700/50 bg-gradient-to-br from-emerald-500 to-green-600 p-5 sm:p-6 text-white shadow-lg shadow-emerald-900/20"
+                className="rounded-2xl border border-emerald-300/60 dark:border-emerald-700/50 bg-emerald-50 dark:bg-emerald-900/20 p-5 sm:p-6 text-emerald-800 dark:text-emerald-200 shadow-lg shadow-emerald-900/20"
               >
                 <div className="flex items-center gap-3 mb-2">
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
-                    className="w-3 h-3 bg-white rounded-full"
+                    className="w-3 h-3 bg-emerald-500 dark:bg-emerald-300 rounded-full"
                   />
                   <h4 className="font-semibold">Available for Work</h4>
                 </div>
-                <p className="text-sm text-emerald-50/90">
+                <p className="text-sm text-emerald-700 dark:text-emerald-300">
                   Currently accepting new projects and opportunities
                 </p>
               </motion.div>
@@ -335,14 +347,14 @@ const Contact = () => {
             <motion.div variants={itemVariants} className="lg:col-span-3">
               <form
                 onSubmit={handleSubmit}
-                className="rounded-3xl border border-gray-200/80 dark:border-dark-600 bg-white/85 dark:bg-dark-900/75 p-5 sm:p-7 lg:p-8 backdrop-blur-xl shadow-xl"
+                className="rounded-3xl border border-pastel-blue/30 dark:border-white/[0.16] bg-white/85 dark:bg-dark-800/85 p-5 sm:p-7 lg:p-8 backdrop-blur-xl shadow-xl"
               >
                 <div className="space-y-5 sm:space-y-6">
                   {/* Name Field */}
                   <div>
                     <label
                       htmlFor="name"
-                      className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      className="mb-2 block text-sm font-semibold text-text-secondary dark:text-gray-200"
                     >
                       Your Name
                     </label>
@@ -356,8 +368,8 @@ const Contact = () => {
                       aria-invalid={Boolean(errors.name)}
                       className={`w-full px-4 py-3 rounded-xl border-2 ${errors.name
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-200 dark:border-dark-600 focus:border-primary-500 dark:focus:border-primary-400'
-                        } bg-white dark:bg-dark-800/80 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none shadow-sm focus:shadow-md`}
+                        : 'border-pastel-blue/30 dark:border-white/[0.18] focus:border-pastel-blue dark:focus:border-pastel-powder'
+                        } bg-white dark:bg-dark-700/80 text-text-primary dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-300 focus:outline-none shadow-sm focus:shadow-md`}
                       placeholder="John Doe"
                     />
                     {errors.name && (
@@ -375,7 +387,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      className="mb-2 block text-sm font-semibold text-text-secondary dark:text-gray-200"
                     >
                       Email Address
                     </label>
@@ -389,8 +401,8 @@ const Contact = () => {
                       aria-invalid={Boolean(errors.email)}
                       className={`w-full px-4 py-3 rounded-xl border-2 ${errors.email
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-200 dark:border-dark-600 focus:border-primary-500 dark:focus:border-primary-400'
-                        } bg-white dark:bg-dark-800/80 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none shadow-sm focus:shadow-md`}
+                        : 'border-pastel-blue/30 dark:border-white/[0.18] focus:border-pastel-blue dark:focus:border-pastel-powder'
+                        } bg-white dark:bg-dark-700/80 text-text-primary dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-300 focus:outline-none shadow-sm focus:shadow-md`}
                       placeholder="john@example.com"
                     />
                     {errors.email && (
@@ -408,7 +420,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="subject"
-                      className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      className="mb-2 block text-sm font-semibold text-text-secondary dark:text-gray-200"
                     >
                       Subject
                     </label>
@@ -422,8 +434,8 @@ const Contact = () => {
                       aria-invalid={Boolean(errors.subject)}
                       className={`w-full px-4 py-3 rounded-xl border-2 ${errors.subject
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-200 dark:border-dark-600 focus:border-primary-500 dark:focus:border-primary-400'
-                        } bg-white dark:bg-dark-800/80 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none shadow-sm focus:shadow-md`}
+                        : 'border-pastel-blue/30 dark:border-white/[0.18] focus:border-pastel-blue dark:focus:border-pastel-powder'
+                        } bg-white dark:bg-dark-700/80 text-text-primary dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-300 focus:outline-none shadow-sm focus:shadow-md`}
                       placeholder="Project Inquiry"
                     />
                     {errors.subject && (
@@ -441,7 +453,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="message"
-                      className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      className="mb-2 block text-sm font-semibold text-text-secondary dark:text-gray-200"
                     >
                       Message
                     </label>
@@ -455,8 +467,8 @@ const Contact = () => {
                       aria-invalid={Boolean(errors.message)}
                       className={`w-full px-4 py-3 rounded-xl border-2 ${errors.message
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-200 dark:border-dark-600 focus:border-primary-500 dark:focus:border-primary-400'
-                        } bg-white dark:bg-dark-800/80 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none shadow-sm focus:shadow-md transition-colors resize-none`}
+                        : 'border-pastel-blue/30 dark:border-white/[0.18] focus:border-pastel-blue dark:focus:border-pastel-powder'
+                        } bg-white dark:bg-dark-700/80 text-text-primary dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-300 focus:outline-none shadow-sm focus:shadow-md transition-colors resize-none`}
                       placeholder="Tell me about your project..."
                     />
                     {errors.message && (
@@ -486,9 +498,9 @@ const Contact = () => {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isSubmitting || isSubmitted}
-                    className={`w-full py-3.5 sm:py-4 rounded-xl font-semibold text-white shadow-lg transition-all flex items-center justify-center gap-2 ${isSubmitted
+                    className={`w-full py-3.5 sm:py-4 rounded-xl font-semibold shadow-lg transition-all flex items-center justify-center gap-2 ${isSubmitted
                       ? 'bg-green-500'
-                      : 'bg-gradient-to-r from-primary-600 to-purple-600 hover:shadow-xl hover:brightness-110'
+                      : 'bg-pastel-lavender dark:bg-pastel-lavender/85 text-text-primary dark:text-dark-900 hover:bg-pastel-lavender/85 dark:hover:bg-pastel-lavender hover:shadow-xl'
                       } disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {isSubmitting ? (

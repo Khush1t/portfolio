@@ -44,8 +44,8 @@ const Hero = () => {
 
       {/* Soft Pastel Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-pastel-blue/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] bg-pastel-lavender/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-pastel-blue/20 dark:bg-pastel-blue/[0.12] rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] bg-pastel-lavender/20 dark:bg-pastel-lavender/[0.12] rounded-full blur-3xl" />
       </div>
 
       {/* Main Content */}
@@ -93,7 +93,7 @@ const Hero = () => {
           {/* Description */}
           <motion.p
             variants={itemVariants}
-            className="text-lg sm:text-xl text-text-muted dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-lg sm:text-xl text-text-muted dark:text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
             Crafting exceptional digital experiences through clean code,
             modern design, and innovative solutions.
@@ -108,7 +108,7 @@ const Hero = () => {
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => handleScroll('#projects')}
-              className="group px-8 py-4 bg-pastel-lavender hover:bg-pastel-lavender/80 text-text-primary rounded-2xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+              className="group px-8 py-4 bg-pastel-lavender hover:bg-pastel-lavender/80 dark:bg-pastel-lavender/70 dark:hover:bg-pastel-lavender/85 text-text-primary dark:text-dark-900 rounded-2xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center gap-2"
             >
               View My Work
               <FiArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
@@ -119,7 +119,7 @@ const Hero = () => {
               download="My_Resume.pdf"
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 bg-white/90 dark:bg-dark-800/90 backdrop-blur-sm text-text-primary dark:text-white rounded-2xl font-semibold shadow-md hover:shadow-lg transition-all border border-pastel-blue/30 dark:border-pastel-powder/20 flex items-center gap-2"
+              className="px-8 py-4 bg-white/90 dark:bg-white/[0.12] dark:hover:bg-white/[0.18] backdrop-blur-sm text-text-primary dark:text-white rounded-2xl font-semibold shadow-md hover:shadow-lg transition-all border border-pastel-blue/30 dark:border-white/[0.16] flex items-center gap-2"
             >
               <FiDownload size={20} />
               Download Resume
@@ -132,9 +132,33 @@ const Hero = () => {
             className="flex gap-4 justify-center"
           >
             {[
-              { icon: FiGithub, href: 'https://github.com/Khush1t', label: 'GitHub', bg: 'bg-pastel-powder/30 hover:bg-pastel-powder/50' },
-              { icon: FiLinkedin, href: 'https://linkedin.com/in/khush1t', label: 'LinkedIn', bg: 'bg-pastel-blue/30 hover:bg-pastel-blue/50' },
-              { icon: FiMail, href: 'mailto:khushwant0328@gmail.com', label: 'Email', bg: 'bg-pastel-peach/30 hover:bg-pastel-peach/50' },
+              {
+                icon: FiGithub,
+                href: 'https://github.com/Khush1t',
+                label: 'GitHub',
+                bg: 'bg-pastel-powder/70 hover:bg-pastel-powder/100',
+                hoverBg: 'dark:hover:bg-pastel-powder/[0.26]',
+                hoverBorder: 'dark:hover:border-pastel-powder/70',
+                hoverIcon: 'dark:group-hover:text-pastel-powder',
+              },
+              {
+                icon: FiLinkedin,
+                href: 'https://linkedin.com/in/khush1t',
+                label: 'LinkedIn',
+                bg: 'bg-pastel-blue/70 hover:bg-pastel-blue/100',
+                hoverBg: 'dark:hover:bg-pastel-blue/[0.28]',
+                hoverBorder: 'dark:hover:border-pastel-blue/70',
+                hoverIcon: 'dark:group-hover:text-pastel-blue',
+              },
+              {
+                icon: FiMail,
+                href: 'mailto:khushwant0328@gmail.com',
+                label: 'Email',
+                bg: 'bg-pastel-peach/70 hover:bg-pastel-peach/100',
+                hoverBg: 'dark:hover:bg-pastel-coral/[0.28]',
+                hoverBorder: 'dark:hover:border-pastel-coral/70',
+                hoverIcon: 'dark:group-hover:text-pastel-coral',
+              },
             ].map((social) => (
               <motion.a
                 key={social.label}
@@ -143,10 +167,10 @@ const Hero = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-4 rounded-2xl ${social.bg} text-text-primary dark:text-gray-300 transition-all shadow-sm hover:shadow-md border border-gray-200/30 dark:border-white/10`}
+                className={`group p-4 rounded-2xl ${social.bg} dark:bg-dark-700/80 ${social.hoverBg} text-text-primary dark:text-gray-100 transition-all shadow-sm hover:shadow-md border border-gray-200/30 dark:border-white/[0.16] ${social.hoverBorder}`}
                 aria-label={social.label}
               >
-                <social.icon size={22} />
+                <social.icon size={22} className={`transition-colors ${social.hoverIcon}`} />
               </motion.a>
             ))}
           </motion.div>

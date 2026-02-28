@@ -28,7 +28,8 @@ const Experience = () => {
         'Designed Keyword Search Microservice using Elastic Stack, reducing query response time by 75%',
         'Integrated Redis caching layer, improving high-demand search performance by 62%',
       ],
-      color: 'from-blue-500 to-purple-500',
+      nodeClass: 'bg-pastel-blue/20 dark:bg-pastel-blue/25 border-pastel-blue/50 dark:border-pastel-powder/40 text-text-primary dark:text-white',
+      pulseClass: 'bg-pastel-blue/30 dark:bg-pastel-blue/20',
     },
     {
       id: 2,
@@ -43,7 +44,8 @@ const Experience = () => {
         'Created dataset of 50,000+ data points from 50+ farms across three major coffee-producing regions',
         'Enabled farmers to optimize production and minimize losses through predictive analytics',
       ],
-      color: 'from-green-500 to-teal-500',
+      nodeClass: 'bg-pastel-mint/30 dark:bg-pastel-mint/25 border-pastel-mint/50 dark:border-pastel-mint/40 text-text-primary dark:text-white',
+      pulseClass: 'bg-pastel-mint/30 dark:bg-pastel-mint/20',
     },
   ];
 
@@ -73,11 +75,11 @@ const Experience = () => {
     <section
       id="experience"
       ref={ref}
-      className="py-20 md:py-32 bg-gray-50 dark:bg-dark-800 relative overflow-hidden"
+      className="py-20 md:py-32 bg-pastel-fog dark:bg-dark-900 relative overflow-hidden"
     >
       {/* Background Decoration */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary-200/20 dark:bg-primary-800/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-200/20 dark:bg-purple-800/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-pastel-blue/20 dark:bg-pastel-blue/[0.12] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-pastel-lavender/20 dark:bg-pastel-lavender/[0.12] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -87,19 +89,19 @@ const Experience = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-4">
-              Work <span className="gradient-text">Experience</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-text-primary dark:text-white mb-4">
+              Work Experience
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-text-muted dark:text-gray-300 max-w-2xl mx-auto">
               My professional journey and career milestones
             </p>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary-600 to-purple-600 mx-auto rounded-full mt-4" />
+            <div className="w-20 h-1 bg-pastel-blue dark:bg-pastel-powder mx-auto rounded-full mt-4" />
           </motion.div>
 
           {/* Timeline */}
           <div className="relative">
             {/* Timeline Line */}
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary-500 to-purple-500 rounded-full" />
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-pastel-blue/40 dark:bg-pastel-powder/40 rounded-full" />
 
             {/* Experience Items */}
             <div className="space-y-12">
@@ -116,17 +118,17 @@ const Experience = () => {
                     className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'
                       }`}
                   >
-                    <div className="bg-white dark:bg-dark-900 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-dark-700">
+                    <div className="bg-white dark:bg-white/[0.04] rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-pastel-blue/20 dark:border-white/[0.08]">
                       {/* Company & Title */}
                       <div className="mb-4">
-                        <h3 className="text-2xl font-display font-bold text-gray-900 dark:text-white mb-2">
+                        <h3 className="text-2xl font-display font-bold text-text-primary dark:text-white mb-2">
                           {exp.title}
                         </h3>
-                        <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-lg mb-2 justify-start md:justify-end">
+                        <div className="flex items-center gap-2 text-text-secondary dark:text-gray-300 font-semibold text-lg mb-2 justify-start md:justify-end">
                           <FiBriefcase size={20} />
                           <span>{exp.company}</span>
                         </div>
-                        <div className={`flex flex-wrap gap-3 text-gray-600 dark:text-gray-400 text-sm ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
+                        <div className={`flex flex-wrap gap-3 text-text-muted dark:text-gray-300 text-sm ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
                           }`}>
                           <span className="flex items-center gap-1">
                             <FiCalendar size={16} />
@@ -140,14 +142,14 @@ const Experience = () => {
                       </div>
 
                       {/* Description */}
-                      <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                      <p className="text-text-secondary dark:text-gray-300 mb-4 leading-relaxed">
                         {exp.description}
                       </p>
 
                       {/* Achievements */}
                       <div className={`space-y-2 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'
                         }`}>
-                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                        <h4 className="font-semibold text-text-primary dark:text-white mb-3">
                           Key Achievements:
                         </h4>
                         <ul className="space-y-2">
@@ -157,9 +159,9 @@ const Experience = () => {
                               initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
                               animate={inView ? { opacity: 1, x: 0 } : {}}
                               transition={{ delay: 0.5 + i * 0.1 }}
-                              className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
+                              className="flex items-start gap-2 text-text-muted dark:text-gray-300"
                             >
-                              <span className="text-primary-500 mt-1">•</span>
+                              <span className="text-pastel-blue dark:text-pastel-powder mt-1">•</span>
                               <span className="flex-1">{achievement}</span>
                             </motion.li>
                           ))}
@@ -178,9 +180,9 @@ const Experience = () => {
                     >
                       <motion.div
                         whileHover={{ scale: 1.2 }}
-                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-lg`}
+                        className={`w-16 h-16 rounded-full border-2 ${exp.nodeClass} flex items-center justify-center shadow-lg`}
                       >
-                        <FiBriefcase size={28} className="text-white" />
+                        <FiBriefcase size={28} />
                       </motion.div>
                       {/* Pulse effect */}
                       <motion.div
@@ -193,7 +195,7 @@ const Experience = () => {
                           repeat: Infinity,
                           ease: 'easeInOut',
                         }}
-                        className={`absolute inset-0 rounded-full bg-gradient-to-br ${exp.color}`}
+                        className={`absolute inset-0 rounded-full ${exp.pulseClass}`}
                       />
                     </motion.div>
                   </div>

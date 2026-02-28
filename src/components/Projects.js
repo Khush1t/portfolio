@@ -159,11 +159,11 @@ const Projects = () => {
     <section
       id="projects"
       ref={ref}
-      className="py-20 md:py-32 bg-white dark:bg-dark-900 relative overflow-hidden"
+      className="py-20 md:py-32 bg-pastel-fog dark:bg-dark-900 relative overflow-hidden"
     >
       {/* Background Decoration */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-200/20 dark:bg-purple-800/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-200/20 dark:bg-primary-800/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-pastel-lavender/20 dark:bg-pastel-lavender/[0.12] rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-pastel-blue/20 dark:bg-pastel-blue/[0.12] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -173,13 +173,13 @@ const Projects = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-4">
-              Featured <span className="gradient-text">Projects</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-text-primary dark:text-white mb-4">
+              Featured Projects
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-text-muted dark:text-gray-300 max-w-2xl mx-auto">
               Handpicked projects from my GitHub repositories
             </p>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary-600 to-purple-600 mx-auto rounded-full mt-4" />
+            <div className="w-20 h-1 bg-pastel-blue dark:bg-pastel-powder mx-auto rounded-full mt-4" />
           </motion.div>
 
           {/* Projects Slider */}
@@ -191,7 +191,7 @@ const Projects = () => {
               <button
                 type="button"
                 onClick={() => scrollProjects('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 dark:bg-dark-800/90 text-gray-900 dark:text-white shadow-lg hover:scale-105 transition"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 dark:bg-white/[0.14] dark:hover:bg-pastel-lavender/30 text-text-primary dark:text-white shadow-lg hover:scale-105 transition"
                 aria-label="Previous projects"
               >
                 <FiChevronLeft size={20} />
@@ -202,7 +202,7 @@ const Projects = () => {
               <button
                 type="button"
                 onClick={() => scrollProjects('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 dark:bg-dark-800/90 text-gray-900 dark:text-white shadow-lg hover:scale-105 transition"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 dark:bg-white/[0.14] dark:hover:bg-pastel-lavender/30 text-text-primary dark:text-white shadow-lg hover:scale-105 transition"
                 aria-label="Next projects"
               >
                 <FiChevronRight size={20} />
@@ -223,12 +223,12 @@ const Projects = () => {
                     <motion.div
                       key={projectKey}
                       whileHover={{ y: -8 }}
-                      className="project-card group relative shrink-0 w-[320px] sm:w-[360px] bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                      className="project-card group relative shrink-0 w-[320px] sm:w-[360px] bg-white dark:bg-white/[0.07] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 dark:border dark:border-white/[0.12]"
                     >
-                      <div className="relative h-48 overflow-hidden bg-gray-200 dark:bg-dark-700">
+                      <div className="relative h-48 overflow-hidden bg-pastel-fog dark:bg-dark-700">
                         {showImage ? (
                           isMobileApp ? (
-                            <div className="w-full h-full flex items-center justify-center p-3 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-dark-700 dark:to-dark-800">
+                            <div className="w-full h-full flex items-center justify-center p-3 bg-pastel-fog dark:bg-dark-700">
                               <div className="h-full aspect-[9/19] rounded-[0.8rem] border-2 border-gray-900 dark:border-black overflow-hidden shadow-xl bg-black">
                                 <img
                                   src={project.image}
@@ -257,14 +257,14 @@ const Projects = () => {
                             />
                           )
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary-700 via-primary-600 to-purple-600 flex flex-col items-center justify-center px-6 text-center">
-                            <div className="w-14 h-14 rounded-xl bg-white/20 text-white flex items-center justify-center mb-3">
+                          <div className="w-full h-full bg-pastel-blue/20 dark:bg-pastel-blue/[0.15] flex flex-col items-center justify-center px-6 text-center">
+                            <div className="w-14 h-14 rounded-xl bg-pastel-blue/30 dark:bg-pastel-blue/25 text-text-primary dark:text-white flex items-center justify-center mb-3">
                               <FiCode size={26} />
                             </div>
-                            <p className="text-white text-base font-semibold line-clamp-1">{project.title}</p>
+                            <p className="text-text-primary dark:text-white text-base font-semibold line-clamp-1">{project.title}</p>
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                         <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
                           <motion.a
@@ -273,7 +273,7 @@ const Projects = () => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-white dark:bg-dark-900 rounded-full text-gray-900 dark:text-white shadow-lg"
+                            className="p-3 bg-white/90 dark:bg-white/[0.14] dark:hover:bg-pastel-lavender/30 rounded-full text-text-primary dark:text-white shadow-lg"
                             aria-label="View GitHub repository"
                           >
                             <FiGithub size={20} />
@@ -285,7 +285,7 @@ const Projects = () => {
                               href={project.live}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-3 bg-white dark:bg-dark-900 rounded-full text-gray-900 dark:text-white shadow-lg"
+                              className="p-3 bg-white/90 dark:bg-white/[0.14] dark:hover:bg-pastel-lavender/30 rounded-full text-text-primary dark:text-white shadow-lg"
                               aria-label="View live demo"
                             >
                               <FiExternalLink size={20} />
@@ -296,15 +296,15 @@ const Projects = () => {
 
                       <div className="p-6">
                         <div className="flex items-start justify-between mb-3">
-                          <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          <h3 className="text-xl font-display font-bold text-text-primary dark:text-white transition-colors">
                             {project.title}
                           </h3>
-                          <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                            <FiCode className="text-primary-600 dark:text-primary-400" size={20} />
+                          <div className="p-2">
+                            <FiCode className="text-text-muted dark:text-gray-300" size={20} />
                           </div>
                         </div>
 
-                        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                        <p className="text-text-muted dark:text-gray-300 text-sm mb-4 line-clamp-3">
                           {project.description}
                         </p>
 
@@ -312,7 +312,7 @@ const Projects = () => {
                           {project.tech.map((tech) => (
                             <span
                               key={tech}
-                              className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
+                              className="px-3 py-1 bg-pastel-blue/15 dark:bg-white/[0.06] text-text-secondary dark:text-gray-300 rounded-full text-xs font-medium"
                             >
                               {tech}
                             </span>
@@ -320,15 +320,13 @@ const Projects = () => {
                         </div>
                       </div>
 
-                      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                      <div className="absolute inset-x-0 bottom-0 h-1 bg-pastel-blue dark:bg-pastel-powder/70 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                     </motion.div>
                   );
                 })()
               ))}
             </div>
 
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white dark:from-dark-900 to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white dark:from-dark-900 to-transparent" />
           </motion.div>
 
           {/* View More Button */}
@@ -339,7 +337,7 @@ const Projects = () => {
               href="https://github.com/Khush1t"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-pastel-lavender/70 dark:bg-pastel-lavender/90 text-text-primary dark:text-dark-900 border border-pastel-lavender/40 dark:border-pastel-lavender/60 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
             >
               <FiGithub size={20} />
               View All Projects on GitHub

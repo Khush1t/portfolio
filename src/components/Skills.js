@@ -491,10 +491,10 @@ const Skills = () => {
     <section
       id="skills"
       ref={ref}
-      className="py-20 md:py-28 bg-gray-50 dark:bg-dark-800 relative overflow-hidden"
+      className="py-20 md:py-28 bg-pastel-fog dark:bg-dark-900 relative overflow-hidden"
     >
-      <div className="absolute top-1/4 left-0 w-72 h-72 bg-primary-200/20 dark:bg-primary-800/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-purple-200/20 dark:bg-purple-800/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-0 w-72 h-72 bg-pastel-blue/20 dark:bg-pastel-blue/[0.12] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-pastel-lavender/20 dark:bg-pastel-lavender/[0.12] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -503,23 +503,23 @@ const Skills = () => {
           animate={inView ? 'visible' : 'hidden'}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-4">
-              Skills & <span className="gradient-text">Expertise</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-text-primary dark:text-white mb-4">
+              Skills & Expertise
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-text-muted dark:text-gray-300 max-w-2xl mx-auto">
               Technologies and tools I use to bring ideas to life
             </p>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary-600 to-purple-600 mx-auto rounded-full mt-4" />
+            <div className="w-20 h-1 bg-pastel-blue dark:bg-pastel-powder mx-auto rounded-full mt-4" />
           </motion.div>
 
           <motion.div variants={itemVariants} className="mb-7 flex justify-center">
-            <div className="inline-flex items-center rounded-full border border-gray-200 dark:border-dark-700 bg-white/85 dark:bg-dark-900/75 p-1 shadow-md backdrop-blur-sm">
+            <div className="inline-flex items-center rounded-full border border-pastel-blue/30 dark:border-white/[0.14] bg-white/85 dark:bg-white/[0.08] p-1 shadow-md backdrop-blur-sm">
               <button
                 type="button"
                 onClick={() => setMode('free')}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${mode === 'free'
-                  ? 'bg-gradient-to-r from-primary-600 to-purple-600 text-white'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-800'
+                  ? 'bg-pastel-lavender/60 dark:bg-pastel-lavender/80 text-text-primary dark:text-dark-900'
+                  : 'text-text-muted dark:text-gray-300 hover:bg-pastel-blue/15 dark:hover:bg-white/[0.14] dark:hover:text-white'
                   }`}
               >
                 Surprise
@@ -528,8 +528,8 @@ const Skills = () => {
                 type="button"
                 onClick={() => setMode('grid')}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${mode === 'grid'
-                  ? 'bg-gradient-to-r from-primary-600 to-purple-600 text-white'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-800'
+                  ? 'bg-pastel-lavender/60 dark:bg-pastel-lavender/80 text-text-primary dark:text-dark-900'
+                  : 'text-text-muted dark:text-gray-300 hover:bg-pastel-blue/15 dark:hover:bg-white/[0.14] dark:hover:text-white'
                   }`}
               >
                 Skills
@@ -539,9 +539,9 @@ const Skills = () => {
 
           <motion.div variants={itemVariants}>
             <div
-              className={`relative mx-auto w-full max-w-[66rem] rounded-4xl border border-gray-200 dark:border-dark-700 bg-white/70 dark:bg-dark-900/60 backdrop-blur-sm shadow-premium overflow-hidden ${mode === 'grid' ? 'h-[470px] sm:h-[530px] md:h-[570px]' : 'h-[430px] sm:h-[470px] md:h-[510px]'}`}
+              className={`relative mx-auto w-full max-w-[66rem] rounded-4xl border border-pastel-blue/30 dark:border-white/[0.14] bg-white/70 dark:bg-white/[0.06] backdrop-blur-sm shadow-premium overflow-hidden ${mode === 'grid' ? 'h-[470px] sm:h-[530px] md:h-[570px]' : 'h-[430px] sm:h-[470px] md:h-[510px]'}`}
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.08),transparent_45%)] dark:bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.12),transparent_45%)]" />
+              <div className="absolute inset-0 bg-pastel-blue/10 dark:bg-pastel-blue/[0.04]" />
 
               <div className={`absolute inset-0 ${mode === 'free' ? 'px-2 py-2 sm:py-3 sm:pb-0' : 'px-1.5 sm:px-3 md:px-4 py-1.5 sm:py-3 md:py-4'}`}>
                 <div
@@ -578,7 +578,7 @@ const Skills = () => {
                                 style={{ borderColor: `${skill.color}88` }}
                               >
                                 <skill.icon size={16} style={{ color: skill.color }} />
-                                <p className="text-[10px] sm:text-xs lg:text-sm font-semibold text-gray-900 dark:text-white leading-tight whitespace-normal break-words">
+                                <p className="text-[10px] sm:text-xs lg:text-sm font-semibold text-text-primary dark:text-white leading-tight whitespace-normal break-words">
                                   {skill.name}
                                 </p>
                               </div>
@@ -633,7 +633,7 @@ const Skills = () => {
                         >
                           <skill.icon size={isSurpriseMobile ? 20 : (metrics.cardWidth < 130 ? 16 : 18)} style={{ color: skill.color }} />
                           {!isSurpriseMobile && (
-                            <p className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis">
+                            <p className="text-xs sm:text-sm font-semibold text-text-primary dark:text-white whitespace-nowrap overflow-hidden text-ellipsis">
                               {skill.name}
                             </p>
                           )}
